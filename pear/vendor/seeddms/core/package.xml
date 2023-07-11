@@ -1,0 +1,2459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>SeedDMS_Core</name>
+ <channel>pear.php.net</channel>
+ <summary>Document management system</summary>
+ <description>SeedDMS is a web based document management system (DMS). This is
+ the core of it, providing the basic functionality to create/update and delete
+ folders and documents. It also contains a user and group managment</description>
+ <lead>
+  <name>Uwe Steinmann</name>
+  <user>steinm</user>
+  <email>uwe@steinmann.cx</email>
+  <active>yes</active>
+ </lead>
+ <date>2022-12-10</date>
+ <time>13:44:55</time>
+ <version>
+  <release>6.0.22</release>
+  <api>6.0.22</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+ <notes>
+- all changes from 5.1.29 merged
+ </notes>
+ <contents>
+  <dir baseinstalldir="SeedDMS" name="/">
+   <dir name="Core">
+    <file name="inc.ClassDocument.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassFolder.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassDMS.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassUser.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassGroup.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.DBAccessPDO.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.AccessUtils.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.FileUtils.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassAccess.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassKeywords.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassNotification.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassDocumentCategory.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassObject.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassAttribute.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassWorkflow.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassTransmittal.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassDecorator.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="inc.ClassIterator.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /DTD -->
+   <dir name="tests">
+    <file name="AttributeDefinitionTest.php" role="test" />
+    <file name="AttributeTest.php" role="test" />
+    <file name="DatabaseTest.php" role="test" />
+    <file name="DmsTest.php" role="test" />
+    <file name="DmsWithDataTest.php" role="test" />
+    <file name="DocumentTest.php" role="test" />
+    <file name="FolderTest.php" role="test" />
+    <file name="UserTest.php" role="test" />
+    <file name="GroupTest.php" role="test" />
+    <file name="KeywordCategoryTest.php" role="test" />
+    <file name="SeedDmsBase.php" role="test" />
+   </dir> <!-- /tests -->
+   <file name="Core.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.3.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.5.4</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <date>2010-04-27</date>
+   <version>
+    <release>3.0.0</release>
+    <api>3.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+Initial release
+   </notes>
+  </release>
+  <release>
+   <date>2011-07-23</date>
+   <time>08:05:38</time>
+   <version>
+    <release>3.2.0</release>
+    <api>3.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+New release
+   </notes>
+  </release>
+  <release>
+   <date>2012-02-08</date>
+   <time>08:05:38</time>
+   <version>
+    <release>3.3.0</release>
+    <api>3.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- added methods to find and repair errors in document and folder records
+- removed sendmail parameter from some methods in LetoDMS_Core_Document
+- do not use some of the temporay tables anymore
+- SetFetchMode(ADODB_FETCH_ASSOC) in LetoDMS_Core_DatabaseAccess::connect()
+   </notes>
+  </release>
+  <release>
+   <date>2012-03-21</date>
+   <time>07:39:48</time>
+   <version>
+    <release>3.3.1</release>
+    <api>3.3.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- new release
+   </notes>
+  </release>
+  <release>
+   <date>2012-03-22</date>
+   <time>08:07:42</time>
+   <version>
+    <release>3.3.2</release>
+    <api>3.3.2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed bug in LetoDMS_Core_Document::getDir()
+   </notes>
+  </release>
+  <release>
+   <date>2012-03-28</date>
+   <time>08:42:35</time>
+   <version>
+    <release>3.3.3</release>
+    <api>3.3.3</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed bug in LetoDMS_Core_Document::getPath()
+   </notes>
+  </release>
+  <release>
+   <date>2012-04-11</date>
+   <time>13:34:30</time>
+   <version>
+    <release>3.3.4</release>
+    <api>3.3.4</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed bug in LetoDMS_Core_DocumentFile::getPath()
+   </notes>
+  </release>
+  <release>
+   <date>2012-04-30</date>
+   <time>17:11:05</time>
+   <version>
+    <release>3.3.5</release>
+    <api>3.3.5</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- minor corrections
+   </notes>
+  </release>
+  <release>
+   <date>2012-07-16</date>
+   <time>16:04:58</time>
+   <version>
+    <release>3.3.6</release>
+    <api>3.3.6</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- no changes, just keep same version as letodms application
+   </notes>
+  </release>
+  <release>
+   <date>2012-08-25</date>
+   <time>22:07:58</time>
+   <version>
+    <release>3.3.7</release>
+    <api>3.3.7</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- no changes, just keep same version as letodms application
+   </notes>
+  </release>
+  <release>
+   <date>2012-09-16</date>
+   <time>22:14:08</time>
+   <version>
+    <release>3.3.8</release>
+    <api>3.3.8</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- more sql injection protection in LetoDMS_Core_User
+   </notes>
+  </release>
+  <release>
+   <date>2012-09-19</date>
+   <time>08:43:18</time>
+   <version>
+    <release>3.3.9</release>
+    <api>3.3.9</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- version update to be in sync with letodms application
+   </notes>
+  </release>
+  <release>
+   <date>2012-12-13</date>
+   <time>08:02:34</time>
+   <version>
+    <release>3.4.0</release>
+    <api>3.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- added PDO database driver, several sql changes for better compatiblity
+- fixed bug when adding a new document category
+- make sure the database remains consistent even in case of errors
+   </notes>
+  </release>
+  <release>
+   <date>2013-01-24</date>
+   <time>08:02:34</time>
+   <version>
+    <release>4.0.0pre1</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- added database transactions
+- new workflow
+- replaced old var declaration
+   </notes>
+  </release>
+  <release>
+   <date>2013-02-06</date>
+   <time>08:02:34</time>
+   <version>
+    <release>4.0.0pre2</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- lots of bug fixes
+- replaced more of old var declaration
+- more code documentation
+   </notes>
+  </release>
+  <release>
+   <date>2013-02-08</date>
+   <time>08:02:34</time>
+   <version>
+    <release>4.0.0pre3</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- minor bug fixes
+   </notes>
+  </release>
+  <release>
+   <date>2013-02-11</date>
+   <time>15:04:08</time>
+   <version>
+    <release>4.0.0pre4</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- calculate checksum for document versions
+- some bug fixes
+- some more documentation
+- added new methods SeedDMS_Core_Document::getReadUserList() and
+  SeedDMS_Core_Folder::getReadUserList() which replaces getApproversList()
+- fixed sql statement in getReadUserList() for sqlite3
+   </notes>
+  </release>
+  <release>
+   <date>2013-02-14</date>
+   <time>17:36:08</time>
+   <version>
+    <release>4.0.0pre5</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- changed name from letodms to seeddms
+- fixed SeedDMS_Database::TableList()
+   </notes>
+  </release>
+  <release>
+   <date>2013-02-20</date>
+   <time>17:36:08</time>
+   <version>
+    <release>4.0.0RC1</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- minor bugfixes
+   </notes>
+  </release>
+  <release>
+   <date>2013-02-26</date>
+   <time>15:04:08</time>
+   <version>
+    <release>4.0.0</release>
+    <api>4.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- minor bugfixes
+   </notes>
+  </release>
+  <release>
+   <date>2013-03-28</date>
+   <time>13:39:21</time>
+   <version>
+    <release>4.1.0</release>
+    <api>4.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- minor bugfixes
+   </notes>
+  </release>
+  <release>
+   <date>2013-04-05</date>
+   <time>16:08:38</time>
+   <version>
+    <release>4.1.1</release>
+    <api>4.1.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- stay in sync with seeddms application
+   </notes>
+  </release>
+  <release>
+   <date>2013-04-05</date>
+   <time>16:08:38</time>
+   <version>
+    <release>4.1.2</release>
+    <api>4.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- set propper folderList of sub folders after moving a folder
+   </notes>
+  </release>
+  <release>
+   <date>2013-04-08</date>
+   <time>16:45:06</time>
+   <version>
+    <release>4.1.3</release>
+    <api>4.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- stay in sync with seeddms application
+   </notes>
+  </release>
+  <release>
+   <date>2013-04-22</date>
+   <time>09:18:47</time>
+   <version>
+    <release>4.2.0</release>
+    <api>4.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed bug in SeedDMS_Core_DocumentContent::addIndApp()
+   </notes>
+  </release>
+  <release>
+   <date>2013-04-30</date>
+   <time>07:43:29</time>
+   <version>
+    <release>4.2.1</release>
+    <api>4.2.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed bug in SeedDMS_Core_DocumentContent::addIndApp()
+   </notes>
+  </release>
+  <release>
+   <date>2013-05-17</date>
+   <time>09:21:37</time>
+   <version>
+    <release>4.2.2</release>
+    <api>4.2.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- admins can be added as reviewer/approver again
+   </notes>
+  </release>
+  <release>
+   <date>2013-09-05</date>
+   <time>07:41:57</time>
+   <version>
+    <release>4.3.0</release>
+    <api>4.3.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- various small corrections
+- comment of version is no longer taken from document if version comment is empty
+- passing an array of users to SeedDMЅ_Core_DMS::search() instead of a single user ist now allowed
+- turn on foreign key constraints for sqlite3
+- SeedDMЅ_Core_Folder::getPath() can handle a subfolder treated as a root folder
+   </notes>
+  </release>
+  <release>
+   <date>2013-11-27</date>
+   <time>10:57:32</time>
+   <version>
+    <release>4.3.2</release>
+    <api>4.3.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- new method SeedDMS_Core_Folder::isSubFolder()
+- check for subFolder in SeedDMS_Core_Folder::setParent()
+- new methods SeedDMS_Core_DMS::checkFolders() and SeedDMS_Core_DMS::checkDocuments()
+   </notes>
+  </release>
+  <release>
+   <date>2014-02-01</date>
+   <time>16:19:34</time>
+   <version>
+    <release>4.3.3</release>
+    <api>4.3.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Folder::getDocuments() and SeedDMS_Folder::getSubFolders() do not
+  do any sorting if $orderby is not set.
+- database hostname can have port seperated by ':'
+- make all functions in SeedDMS_Core_File static (fixes problem with php 5.5.x)
+   </notes>
+  </release>
+  <release>
+   <date>2014-02-01</date>
+   <time>16:19:34</time>
+   <version>
+    <release>4.3.4</release>
+    <api>4.3.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix handling of multivalue attributes
+   </notes>
+  </release>
+  <release>
+   <date>2014-03-04</date>
+   <time>16:19:34</time>
+   <version>
+    <release>4.3.5</release>
+    <api>4.3.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+no changes
+   </notes>
+  </release>
+  <release>
+   <date>2014-03-18</date>
+   <time>16:19:34</time>
+   <version>
+    <release>4.3.6</release>
+    <api>4.3.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add optional parameters $publiconly=false and $user=null to SeedDMS_Core_Document::getDocumentLinks()
+- add new method SeedDMS_Core_Document::getReverseDocumentLinks()
+   </notes>
+  </release>
+  <release>
+   <date>2014-03-21</date>
+   <time>09:03:59</time>
+   <version>
+    <release>4.3.7</release>
+    <api>4.3.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+no changes
+   </notes>
+  </release>
+  <release>
+   <date>2014-04-09</date>
+   <time>09:03:59</time>
+   <version>
+    <release>4.3.8</release>
+    <api>4.3.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- new method SeedDMS_Core_DMS::getStatisticalData()
+   </notes>
+  </release>
+  <release>
+   <date>2014-07-30</date>
+   <time>09:03:59</time>
+   <version>
+    <release>4.3.9</release>
+    <api>4.3.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_KeywordCategory::getKeywordLists() sorts keywords aphabetically
+- SeedDMS_Core_DMS::addUser() doesn't throw an error if sql_mode is set to STRICT_TRANS_TABLES and pwdexpiration is not set to a valid date.
+   </notes>
+  </release>
+  <release>
+   <date>2014-10-22</date>
+   <time>14:13:32</time>
+   <version>
+    <release>4.3.10</release>
+    <api>4.3.10</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+new release
+   </notes>
+  </release>
+  <release>
+   <date>2014-11-13</date>
+   <time>09:09:35</time>
+   <version>
+    <release>4.3.11</release>
+    <api>4.3.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed saving multivalue attributes
+- add method SeedDMS_Core_Attribute::getValueAsArray()
+   </notes>
+  </release>
+  <release>
+   <date>2014-11-17</date>
+   <time>09:09:35</time>
+   <version>
+    <release>4.3.12</release>
+    <api>4.3.12</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix searching folders with multivalue attributes
+   </notes>
+  </release>
+  <release>
+   <date>2014-11-27</date>
+   <time>11:56:35</time>
+   <version>
+    <release>4.3.13</release>
+    <api>4.3.13</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix searching for attributes
+- add some more documentation
+- SeedDMS_Core_DMS::getDocumentCategories() returns categories sorted by name (Bug #181)
+- new methode SeedDMS_Core_Document::replaceContent() which replaces the content of a version.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>4.3.14</release>
+    <api>4.3.14</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add missing start transaction in SeedDMD_Core_Folder::remove()
+- SeedDMD_Core_Folder::isSubFolder() doesn't compare object instances anymore (Bug #194)
+   </notes>
+  </release>
+  <release>
+   <date>2015-02-12</date>
+   <time>18:23:24</time>
+   <version>
+    <release>4.3.15</release>
+    <api>4.3.15</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+users returned by SeedDMS_Core_DMS::getAllUsers() have language and theme set again
+   </notes>
+  </release>
+  <release>
+   <date>2015-03-20</date>
+   <time>08:02:04</time>
+   <version>
+    <release>4.3.16</release>
+    <api>4.3.16</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+no changes
+   </notes>
+  </release>
+  <release>
+   <date>2015-03-27</date>
+   <time>08:02:04</time>
+   <version>
+    <release>4.3.17</release>
+    <api>4.3.17</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+clean workflow log when a document version was deleted
+   </notes>
+  </release>
+  <release>
+   <date>2015-06-09</date>
+   <time>11:26:18</time>
+   <version>
+    <release>4.3.18</release>
+    <api>4.3.18</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add optional paramter $msg to SeedDMS_Core_DocumentContent::verifyStatus()
+- add method SeedDMS_Core_DMS::getDuplicateDocumentContent()
+   </notes>
+  </release>
+  <release>
+   <date>2015-06-26</date>
+   <time>16:45:59</time>
+   <version>
+    <release>4.3.19</release>
+    <api>4.3.19</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add optional paramter $noclean to clearAccessList(), setDefaultAccess(), setInheritAccess()
+- clearAccessList() will clean up the notifier list
+- new method cleanNotifyList()
+   </notes>
+  </release>
+  <release>
+   <date>2015-06-26</date>
+   <time>16:45:59</time>
+   <version>
+    <release>4.3.20</release>
+    <api>4.3.20</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add method SeedDMS_Core_DMS::checkDate()
+- add method SeedDMS_Core_Document::setDate()
+- add method SeedDMS_Core_Folder::setDate()
+- date can be passed to SeedDMS_Core_DocumentContent::setStatus()
+- add method SeedDMS_Core_DocumentContent::rewriteStatusLog()
+- add method SeedDMS_Core_DocumentContent::rewriteReviewLog()
+- add method SeedDMS_Core_DocumentContent::rewriteApprovalLog()
+- access rights for guest are also taken into account if set in an acl. Previously guest could gain read rights even if the access was probibited
+by a group or user right
+   </notes>
+  </release>
+  <release>
+   <date>2015-09-28</date>
+   <time>07:53:19</time>
+   <version>
+    <release>4.3.21</release>
+    <api>4.3.21</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add method SeedDMS_Core_Database::getCurrentTimestamp()
+- add method SeedDMS_Core_Database::getCurrentDatetime()
+- user getCurrentTimestamp() and getCurrentDatetime() whenever possible
+   </notes>
+  </release>
+  <release>
+   <date>2015-11-09</date>
+   <time>19:49:20</time>
+   <version>
+    <release>4.3.22</release>
+    <api>4.3.22</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix sql statement to reset password
+- pass some more information for timeline
+   </notes>
+  </release>
+  <release>
+   <date>2016-01-21</date>
+   <time>07:12:53</time>
+   <version>
+    <release>4.3.23</release>
+    <api>4.3.23</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- new method SeedDMS_Core_DMS::createDump()
+- minor improvements int SeedDMS_Core_Document::getReadAccessList()
+   </notes>
+  </release>
+  <release>
+   <date>2016-01-22</date>
+   <time>07:12:53</time>
+   <version>
+    <release>4.3.24</release>
+    <api>4.3.24</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- make sure boolean attribute is saved as 0/1
+- add SeedDMS_Core_User::[g|s]etMandatoryWorkflows()
+- add SeedDMS_Core_User::getNotifications()
+- add SeedDMS_Core_Group::getNotifications()
+- SeedDMS_Core_DMS::getNotificationsByGroup() and
+SeedDMS_Core_DMS::getNotificationsByUser() are deprecated
+- SeedDMS_Core_DocumentCategory::getDocumentsByCategory() now returns the documents
+- add SeedDMS_Core_Group::getWorkflowStatus()
+- SeedDMS_Core_User::getDocumentsLocked() sets locking user propperly
+   </notes>
+  </release>
+  <release>
+   <date>2016-01-22</date>
+   <time>09:28:28</time>
+   <version>
+    <release>5.0.0</release>
+    <api>5.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- classes can be overloaded
+- clean workflow log when a document version was deleted
+   </notes>
+  </release>
+  <release>
+   <date>2016-01-21</date>
+   <time>07:12:53</time>
+   <version>
+    <release>4.3.24</release>
+    <api>4.3.24</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- make sure boolean attribute is saved as 0/1
+- add SeedDMS_Core_User::[g|s]etMandatoryWorkflows()
+- add SeedDMS_Core_User::getNotifications()
+- add SeedDMS_Core_Group::getNotifications()
+- SeedDMS_Core_DMS::getNotificationsByGroup() and
+SeedDMS_Core_DMS::getNotificationsByUser() are deprecated
+- SeedDMS_Core_DocumentCategory::getDocumentsByCategory() now returns the documents
+- add SeedDMS_Core_Group::getWorkflowStatus()
+- SeedDMS_Core_User::getDocumentsLocked() sets locking user propperly
+   </notes>
+  </release>
+  <release>
+   <date>2016-03-08</date>
+   <time>07:12:53</time>
+   <version>
+    <release>4.3.25</release>
+    <api>4.3.25</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- rename SeedDMS_Core_Group::getNotificationsByGroup() to getNotifications()
+- use __construct() for all constructors
+- fix setting multi value attributes for versions
+   </notes>
+  </release>
+  <release>
+   <date>2016-04-04</date>
+   <time>07:38:23</time>
+   <version>
+    <release>4.3.26</release>
+    <api>4.3.26</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add more callbacks
+   </notes>
+  </release>
+  <release>
+   <date>2016-04-26</date>
+   <time>12:04:59</time>
+   <version>
+    <release>4.3.27</release>
+    <api>4.3.27</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- callbacks can have more then one user function
+- fix some sql statements, because they didn't work with mysql 5.7.5 anymore
+   </notes>
+  </release>
+  <release>
+   <date>2016-08-24</date>
+   <time>10:18:59</time>
+   <version>
+    <release>4.3.28</release>
+    <api>4.3.28</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMЅ_Core_DMS::search() searches also comment of document version
+   </notes>
+  </release>
+  <release>
+   <date>2016-09-06</date>
+   <time>10:18:59</time>
+   <version>
+    <release>4.3.29</release>
+    <api>4.3.29</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMЅ_Core_Object::getAttributes() orders attributes by name of attribute definition
+- SeedDMЅ_Core_Workflow::addTransition() force reload of transition list after adding a
+- SeedDMЅ_Core_Document::rewrite[Review|Approval]Log() will also copy file if it exists
+- add method SeedDMЅ_Core_Document::rewriteWorkflowLog()
+   </notes>
+  </release>
+  <release>
+   <date>2016-10-07</date>
+   <time>10:18:59</time>
+   <version>
+    <release>4.3.30</release>
+    <api>4.3.30</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- new method SeedDMЅ_Core_AttributeDefinition::getValueSetSeparator() 
+- trim each value of a value set before saving the complete value set as a string
+   </notes>
+  </release>
+  <release>
+   <date>2016-11-02</date>
+   <time>10:18:59</time>
+   <version>
+    <release>4.3.31</release>
+    <api>4.3.31</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- new method SeedDMЅ_Core_WorkflowAction::getTransitions() 
+- new method SeedDMЅ_Core_WorkflowState::getTransitions() 
+- new method SeedDMЅ_Core_AttributeDefinition::parseValue() 
+- add check for cycles in workflow SeedDMS_Core_Workflow::checkForCycles()
+   </notes>
+  </release>
+  <release>
+   <date>2017-01-12</date>
+   <time>10:18:59</time>
+   <version>
+    <release>4.3.32</release>
+    <api>4.3.32</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- order groups by name returned by getReadAccessList()
+- add optional parameter to SeedDMS_Core_DMS::filterDocumentLinks()
+- SeedDMS_Core_DMS::search() can search for document/folder id
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-22</date>
+   <time>11:25:11</time>
+   <version>
+    <release>4.3.33</release>
+    <api>4.3.33</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMЅ_Core_DMS::getTimeline() no longer returns duplicate documents
+- SeedDMЅ_Core_Document::addContent() sets workflow after status was set
+- SeedDMЅ_Core_Keyword::setOwner() fix sql statement
+- SeedDMЅ_Core_User::setFullname() minor fix in sql statement
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-28</date>
+   <time>06:38:12</time>
+   <version>
+    <release>4.3.34</release>
+    <api>4.3.34</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+SeedDMS_Core_DMS::getDuplicateDocumentContent() returns complete document
+   </notes>
+  </release>
+  <release>
+   <date>2017-07-11</date>
+   <time>06:38:12</time>
+   <version>
+    <release>4.3.35</release>
+    <api>4.3.35</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+do not sort some temporary tables anymore, because it causes an error in mysql if sql_mode=only_full_group_by is set
+   </notes>
+  </release>
+  <release>
+   <date>2017-03-22</date>
+   <time>06:38:12</time>
+   <version>
+    <release>4.3.36</release>
+    <api>4.3.36</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix sql statement for creating temp. tables (sqlite)
+   </notes>
+  </release>
+  <release>
+   <date>2018-02-14</date>
+   <time>06:38:12</time>
+   <version>
+    <release>4.3.37</release>
+    <api>4.3.37</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_DMS::search() finds documents without a status log
+   </notes>
+  </release>
+  <release>
+   <date>2016-01-22</date>
+   <time>14:34:58</time>
+   <version>
+    <release>5.0.1</release>
+    <api>5.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.24 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-04-26</date>
+   <time>12:04:59</time>
+   <version>
+    <release>5.0.2</release>
+    <api>5.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.25 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-04-04</date>
+   <time>08:56:33</time>
+   <version>
+    <release>5.0.3</release>
+    <api>5.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- use classname from SeedDMS_Core_DMS::_classnames for SeedDMS_Core_DocumentContent
+- all changes from 4.3.26 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-05-03</date>
+   <time>08:56:33</time>
+   <version>
+    <release>5.0.4</release>
+    <api>5.0.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.27 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-08-09</date>
+   <time>06:23:34</time>
+   <version>
+    <release>5.0.5</release>
+    <api>5.0.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.28 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-09-06</date>
+   <time>06:23:34</time>
+   <version>
+    <release>5.0.6</release>
+    <api>5.0.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.29 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-11-02</date>
+   <time>06:23:34</time>
+   <version>
+    <release>5.0.7</release>
+    <api>5.0.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.30 merged
+- better attribute value checking
+   </notes>
+  </release>
+  <release>
+   <date>2016-11-02</date>
+   <time>06:23:34</time>
+   <version>
+    <release>5.0.8</release>
+    <api>5.0.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.31 merged
+   </notes>
+  </release>
+  <release>
+   <date>2016-11-02</date>
+   <time>06:23:34</time>
+   <version>
+    <release>5.0.9</release>
+    <api>5.0.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.32 merged
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-20</date>
+   <time>06:23:34</time>
+   <version>
+    <release>5.0.10</release>
+    <api>5.0.10</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.33 merged
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-28</date>
+   <time>07:07:02</time>
+   <version>
+    <release>5.0.11</release>
+    <api>5.0.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.34 merged
+   </notes>
+  </release>
+  <release>
+   <date>2017-03-23</date>
+   <time>07:07:02</time>
+   <version>
+    <release>5.0.12</release>
+    <api>5.0.12</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+all sql statements can be logged to a file
+do not sort some temporary tables anymore, because it causes an error in mysql if            sql_mode=only_full_group_by is set
+   </notes>
+  </release>
+  <release>
+   <date>2017-07-13</date>
+   <time>07:07:02</time>
+   <version>
+    <release>5.0.13</release>
+    <api>5.0.13</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 4.3.36 merged
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-20</date>
+   <time>07:07:02</time>
+   <version>
+    <release>5.1.0</release>
+    <api>5.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- added postgres support
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-20</date>
+   <time>07:07:02</time>
+   <version>
+    <release>5.1.1</release>
+    <api>5.1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.0.11 merged
+   </notes>
+  </release>
+  <release>
+   <date>2017-03-23</date>
+   <time>06:34:50</time>
+   <version>
+    <release>5.1.2</release>
+    <api>5.1.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_DMS::filterDocumentFiles() returns also documents which are not public
+  if the owner tries to access them
+- Check return value of onPreRemove[Document|Folder], return from calling method if bool
+- Add SeedDMS_Core_DMS::getDocumentList()
+- Limit number of duplicate files to 1000
+- Add hook on(Pre|Post)RemoveContent
+- Add hook onAttributeValidate
+   </notes>
+  </release>
+  <release>
+   <date>2017-08-23</date>
+   <time>06:34:50</time>
+   <version>
+    <release>5.1.3</release>
+    <api>5.1.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_Document::getNotifyList() and SeedDMS_Core_Folder::getNotifyList()
+returns just users which are not disabled
+- add new methods removeFromProcesses(), getWorkflowsInvolved(), getKeywordCategories() to SeedDMS_Core_User
+- add methods isMandatoryReviewerOf() and isMandatoryApproverOf()
+- add methods transferDocumentsFolders() and transferEvents()
+- add method SeedDMS_Core_DMS::getDocumentByOriginalFilename()
+   </notes>
+  </release>
+  <release>
+   <date>2017-09-05</date>
+   <time>09:19:24</time>
+   <version>
+    <release>5.1.4</release>
+    <api>5.1.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add virtual access mode for document links and attachments plus callbacks to
+  check access mode in a hook
+- add new method SeedDMS_Core_DMS::getDocumentsExpired()
+- all changes from 5.0.14 merged
+   </notes>
+  </release>
+  <release>
+   <date>2017-11-07</date>
+   <time>09:19:24</time>
+   <version>
+    <release>5.1.5</release>
+    <api>5.1.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- use views instead of temp. tables
+- add list of expired documents in SeedDMS_Core_DMS::getDocumentList()
+- add methods to set comment, name, public, version of document files
+- add method SeedDMS_Core_Document::transferToUser()
+- SeedDMS_Core_Document::addDocumentFile() returns object of file
+- add SeedDMS_Core_DocumentFile::setDate()
+- remove SeedDMS_Core_DocumentCategory::addCategory() and getCategories()
+- add optional parameters $limit and $offset to SeedDMS_Core_Folder::getDocuments()
+  and SeedDMS_Core_Folder::getSubFolders()
+- getInstance() returns now null instead of false if the object was not found in the db
+- add new methods SeedDMS_Core_Document::addCategories() and
+  SeedDMS_Core_Document::removeCategories()
+   </notes>
+  </release>
+  <release>
+   <date>2018-02-14</date>
+   <time>09:19:24</time>
+   <version>
+    <release>5.1.6</release>
+    <api>5.1.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add SeedDMS_Core_Folder::getDocumentsMinMax()
+- add lots of DocBlocks from merge request #8
+- add SeedDMS_Core_AttributeDefinition::removeValue()
+   </notes>
+  </release>
+  <release>
+   <date>2018-04-05</date>
+   <time>09:19:24</time>
+   <version>
+    <release>5.1.7</release>
+    <api>5.1.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- just bump version
+   </notes>
+  </release>
+  <release>
+   <date>2018-07-02</date>
+   <time>09:19:24</time>
+   <version>
+    <release>5.1.8</release>
+    <api>5.1.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_DMS::search() returns false in case of an error
+- do not use views in DBAccessPDO by default anymore, use temp. tables
+- SeedDMS_Core_Document::getNotifyList() has new parameter to include disabled user in list
+- fix possible sql injection in SeedDMS_Core_User
+   </notes>
+  </release>
+  <release>
+   <date>2018-11-13</date>
+   <time>07:31:17</time>
+   <version>
+    <release>5.1.9</release>
+    <api>5.1.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- context can be passed to getAccessMode()
+- call hook in SeedDMS_Core_Folder::getAccessMode()
+- new optional parameter $listguest for SeedDMS_Core_Document::getReadAccessList()
+- remove deprecated methods SeedDMS_Core_Document::convert(), SeedDMS_Core_Document::wasConverted(), SeedDMS_Core_Document::viewOnline(), SeedDMS_Core_Document::getUrl()
+   </notes>
+  </release>
+  <release>
+   <date>2019-04-04</date>
+   <time>07:31:17</time>
+   <version>
+    <release>5.1.10</release>
+    <api>5.1.10</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix php warning if workflow state doesn' have next transition
+- add method SeedDMS_Core_DatabaseAccess::setLogFp()
+   </notes>
+  </release>
+  <release>
+   <date>2019-05-03</date>
+   <time>07:31:17</time>
+   <version>
+    <release>5.1.11</release>
+    <api>5.1.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- ???
+   </notes>
+  </release>
+  <release>
+   <date>2019-07-01</date>
+   <time>07:31:17</time>
+   <version>
+    <release>5.1.12</release>
+    <api>5.1.12</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- parameter $orderby passed to SeedDMS_Core_Folder::getDocuments() and SeedDMS_Core_Folder::getSubFolders() can be a string, but only the first char is evaluated
+- SeedDMS_Core_DMS::search() excepts parameters as array, added orderby
+- add SeedDMS_Core_Folder::hasSubFolderByName()
+- fix SeedDMS_Core_Folder::hasDocumentByName() which returned an int > 0 if documents
+  has been loaded before and even if the document searching for was not among them.
+- add new method SeedDMS_Core_Folder::empty()
+   </notes>
+  </release>
+  <release>
+   <date>2019-09-06</date>
+   <time>07:31:17</time>
+   <version>
+    <release>5.1.13</release>
+    <api>5.1.13</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add decorators
+- add new methods SeedDMS_Core_Document::isType(), SeedDMS_Core_Folder::isType(), SeedDMS_Core_DocumentContent::isType(). Use them instead of checking the class name.
+- skip a fileType with just a '.'
+   </notes>
+  </release>
+  <release>
+   <date>2020-02-17</date>
+   <time>09:16:48</time>
+   <version>
+    <release>5.1.14</release>
+    <api>5.1.14</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- speed up SeedDMS_Core_Folder::getSubFolders() SeedDMS_Core_Folder::getDocuments() by minimizing the number of sql queries.
+   </notes>
+  </release>
+  <release>
+   <date>2020-03-02</date>
+   <time>09:16:48</time>
+   <version>
+    <release>5.1.15</release>
+    <api>5.1.15</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- no changes, just keep same version as seeddms application
+   </notes>
+  </release>
+  <release>
+   <date>2020-04-14</date>
+   <time>09:43:12</time>
+   <version>
+    <release>5.1.16</release>
+    <api>5.1.16</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix call of hooks in SeedDMS_Core
+- add variable lasterror in SeedDMS_Core_DMS which can be set by hooks to pass an
+  error msg to the calling application
+- better error checking in SeedDMS_Core_Document::addDocumentFile()
+   </notes>
+  </release>
+  <release>
+   <date>2020-05-22</date>
+   <time>09:43:12</time>
+   <version>
+    <release>5.1.17</release>
+    <api>5.1.17</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add new callback onSetStatus
+- fix SeedDMS_Core_DMS::getExpiredDocuments(), sql statement failed because temp. tables were not created
+- add parameters $orderdir, $orderby, $update to SeedDMS_Core::getExpiredDocuments()
+   </notes>
+  </release>
+  <release>
+   <date>2020-05-28</date>
+   <time>09:43:12</time>
+   <version>
+    <release>5.1.18</release>
+    <api>5.1.18</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed remaining todos
+- fixed parsing of file size in SeedDMS_Core_File::parse_filesize()
+- fix SeedDMS_Core_DMS::getDocumentByOriginalFilename()
+   </notes>
+  </release>
+  <release>
+   <date>2020-07-30</date>
+   <time>09:43:12</time>
+   <version>
+    <release>5.1.19</release>
+    <api>5.1.19</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add method SeedDMS_Core_Document::setParent() as an alias for setFolder()
+- clear the save content list and latest content in SeedDMS_Core_Document after
+  a version has been deleted.
+- new method SeedDMS_Core_Document::isLatestVersion()
+- add new attribute types 'document', 'folder', 'user', 'group'
+   </notes>
+  </release>
+  <release>
+   <date>2020-09-29</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.20</release>
+    <api>5.1.20</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_DMS::getDocumentList() returns false, if an unknown list is passed
+- SeedDMS_Core_Document::getDocumentFiles() has new parameter to select only those files attached to a specific version of the document
+- removing a document version will not remove attachments of the document anymore
+- set dms of new user instances in SeedDMS_Core_Group
+   </notes>
+  </release>
+  <release>
+   <date>2020-09-29</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.21</release>
+    <api>5.1.21</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Folder_DMS::getAccessList() and getDefaultAccess() do not return fals anymore if the parent does not exists. They just stop inheritance.
+- pass attribute value to callback 'onAttributeValidate'
+- new paramter 'new' of methode SeedDMЅ_Core_AttributeDefinition::validate()
+- check if folder/document is below rootDir can be turned on (default off)
+- SeedDMS_Core_User::setHomeFolder() can be used to unset the home folder
+- check if attribute definition exists when setting attributes of folders and documents
+   </notes>
+  </release>
+  <release>
+   <date>2021-03-15</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.22</release>
+    <api>5.1.22</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add SeedDMS_Core_DatabaseAccess::hasTable()
+- add SeedDMS_Core_User->isType() and SeedDMS_Core_Group->isType()
+- add SeedDMS_Core_User->getDMS() and SeedDMS_Core_Group->getDMS()
+- add new parameter to SeedDMS_Core_DMS->getDocumentList() for skipping expired documents
+- add parameter $incdisabled to SeedDMS_Core_Folder::getNotifyList()
+- do not validate value in SeedDMS_Core_Attribute::setValue(), it should have been done before
+- SeedDMS_Core_DMS::search() can search for last date of document status change
+- smarter caching in SeedDMS_Core_Document::getDocumentFiles() which fixes a potential
+  problem when removing a document
+   </notes>
+  </release>
+  <release>
+   <date>2021-08-19</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.23</release>
+    <api>5.1.23</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_DMS::getTimeline() uses status log instead of document content
+- add methods SeedDMS_Core_DocumentContent::getReviewers() and SeedDMS_Core_DocumentContent::getApprovers()
+- add methods SeedDMS_Core_DocumentContent::getApproveLog() and SeedDMS_Core_DocumentContent::getReviewLog()
+- better handling of document with an empty workflow state
+- fix checking of email addresses by using filter_var instead of regex
+- add new method SeedDMS_Core_Document::hasCategory()
+- add new method SeedDMS_Core_DocumentContent::removeReview()
+- add new method SeedDMS_Core_DocumentContent::removeApproval()
+- add new method SeedDMS_Core_User::getFolders()
+- add new method SeedDMS_Core_User::getDocumentContents()
+- add new method SeedDMS_Core_User::getDocumentFiles()
+- add new method SeedDMS_Core_User::getDocumentLinks()
+- add new type 'foldersperuser' to method SeedDMS_Core_DMS::getStatisticalData()
+   </notes>
+ </release>
+  <release>
+   <date>2021-12-11</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.24</release>
+    <api>5.1.24</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- in SeedDMS_Core_DocumentContent::removeWorkflow() remove records from tblWorklflowLog before tblDWorkflowDocumentContent
+- make all class variables of SeedDMS_Core_User protected
+- fix various errors in SeedDMS_Core_AttributeDefinition::validate()
+- add lots of unit tests
+- replace incorrect use of array_search() by in_array()
+- move method SeedDMS_Core_DMS::createDump() into SeedDMS_Core_DatabaseAccess
+- lots of parameter checking when calling methods()
+- make sure callbacks are callable
+- SeedDMS_Core_Folder::getParent() returns null if there is no parent (used to be false)
+- SeedDMS_Core_DMS::search() will not find document without an expiration date anymore, if the search is limited by an expiration end date but no start date
+- add method SeedDMS_Core_Folder::getFoldersMinMax()
+- init internal cache variables of SeedDMS_Core_Folder/SeedDMS_Core_Document and add method clearCache()
+- SeedDMS_Core_Folder::hasDocuments() does not use the interal document cache anymore
+- SeedDMS_Core_Document::addDocumentLink() returns an object of type SeedDMS_Core_DocumentLink in case of success
+- trim email, comment, language, theme when setting data of user
+- more checks whether an id > 0 when getting a database record
+   </notes>
+  </release>
+  <release>
+   <date>2022-04-22</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.25</release>
+    <api>5.1.25</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- rename getLastWorkflowTransition() to getLastWorkflowLog()
+- getLastWorkflowLog() returns a workflow entry even if the workflow has ended
+- backport setFileType() from 6.0.x
+- add SeedDMS_Core_File::fileExtension()
+- add callbacks on onPostUpdateAttribute, onPostRemoveAttribute, onPostAddAttribute
+- fix searching for document content with a custom attribute having a value set
+   </notes>
+  </release>
+  <release>
+   <date>2022-05-20</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.26</release>
+    <api>5.1.26</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix validating multi value attributes
+- SeedDMS_Core_User::removeFromProcesses() can be limited to a list of documents. In that case only the last version will be modified.
+- add more types to getStatisticalData()
+- add optional parameter $op to SeedDMS_Core_AttributeDefinition::getObjects()
+- SeedDMS_Core_AttributeDefinition::getObjects() will not filter by value if null is passed
+- SeedDMS_Core_DMS::getAllAttributeDefinitions() has second parameter to filter attributes by type
+   </notes>
+  </release>
+  <release>
+   <date>2022-08-31</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.27</release>
+    <api>5.1.27</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix SeedDMS_Core_DMS::addAttributeDefinition() when objtype is 0
+- sort search result even if sortorder is 'i' or 'n'
+- pass an array as an attribute to search() will OR each element
+   </notes>
+  </release>
+  <release>
+   <date>2022-11-07</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.28</release>
+    <api>5.1.28</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix SeedDMS_Core_User::getDocumentContents()
+- fix SeedDMS_Core_File::fileExtension()
+- SeedDMS_Core_DMS::createPasswordRequest() creates a cryptographically secure hash
+- fix sql error when deleting a folder attribute
+- add SeedDMS_Core_Attribute::getParsedValue() and use it in SeedDMS_Core_Object::getAttributeValue()
+- add SeedDMS_Core_DMS::getDuplicateSequenceNo() and SeedDMS_Core_Folder::reorderDocuments()
+- add SeedDMS_Core_File::mimetype(), fix SeedDMS_Core_File::moveDir()
+- all file operations use methods of SeedDMS_Core_File
+- change namespace of iterators from SeedDMS to SeedDMS\Core
+   </notes>
+  </release>
+  <release>
+   <date>2022-11-21</date>
+   <time>13:44:55</time>
+   <version>
+    <release>5.1.29</release>
+    <api>5.1.29</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Core_Folder::addDocument() does rollback transaction propperly when setting document categories fail
+- add $skiproot and $sep parameter to SeedDMS_Core_Folder::getFolderPathPlain()
+- add class name for 'documentfile'
+- add method SeedDMS_Core_KeywordCategory::countKeywordLists()
+   </notes>
+  </release>
+  <release>
+   <date>2017-02-28</date>
+   <time>06:34:50</time>
+   <version>
+    <release>6.0.0</release>
+    <api>6.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.0.14 merged
+- SeedDMS_Core_User::getReceiptStatus() and SeedDMS_Core_User::getReviewStatus()
+only return entries of the latest document version if not specific document and
+version is passed
+- temp. table for revisions can be created
+- new methods SeedDMS_Core_DMS::getDocumentsInReception() and
+SeedDMS_Core_DMS::getDocumentsInRevision()
+- limit hits of sql statement in SeedDMЅ_Core_DMS::getDuplicateDocumentContent() to 1000
+- finishRevsion() puts all revisors into state waiting, so a new revision can be started
+- fix SeedDMS_Core_Group::getRevisionStatus(), which did not always return the last
+log entry first
+- add roles
+- use classname from SeedDMS_Core_DMS::_classnames for SeedDMS_Core_DocumentContent
+- add virtual access mode for document links and attachments plus callbacks to
+  check access mode in a hook
+- add new method SeedDMS_Core_DMS::getDocumentsExpired()
+   </notes>
+  </release>
+  <release>
+   <date>2017-05-28</date>
+   <time>06:34:50</time>
+   <version>
+    <release>6.0.1</release>
+    <api>6.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- speed up getting list of locked documents
+- setting _logfile in inc.DBAccessPDO.php will log execution times in file
+   </notes>
+  </release>
+  <release>
+   <date>2017-12-19</date>
+   <time>09:19:24</time>
+   <version>
+    <release>6.0.2</release>
+    <api>6.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- speed up getting list of locked documents
+- setting _logfile in inc.DBAccessPDO.php will log execution times in file
+- fix sql statement to create temp table ttrevisionid and ttreceiptid
+- SeedDMS_Core_DMS::noReadForStatus no longer needed
+- SeedDMS_Core_Document::checkForDueRevisionWorkflow() also checks if there
+are any waiting or pending revisions at all
+- SeedDMS_Core_User::getReverseSubstitutes() works with new roles
+- fix field name in getDocumentList() to make it work for pgsql
+- views instead of temp. tables can be used
+- ReceiveOwner list does not contain old versions anymore
+- all changes up to 5.1.5 merged
+- getTimeline() also returns data for documents with a scheduled revision
+   </notes>
+  </release>
+  <release>
+   <date>2018-01-23</date>
+   <time>09:19:24</time>
+   <version>
+    <release>6.0.3</release>
+    <api>6.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+pass 0 as default to getObjects()
+SeedDMS_Core_AttributeDefinition::getStatistics() returns propper values for each item in a value set
+SeedDMS_Core_DMS::getDocumentList() returns list of documents without a receiver
+   </notes>
+  </release>
+  <release>
+   <date>2018-02-14</date>
+   <time>09:19:24</time>
+   <version>
+    <release>6.0.4</release>
+    <api>6.0.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+add lists of drafts and obsolete docs in SeedDMS_Core_DMS::getDocumentList()
+add fast sql statement to SeedDMS_Core_Document::getReceiptStatus() if limit=1
+add callback onCheckAccessDocument to SeedDMS_Core_Document::getAccessMode()
+add new document status 'needs correction' (S_NEEDS_CORRECTION)
+do not use views as a replacement for temp. tables anymore, because they are much
+slower.
+add SeedDMS_Core_DocumentContent::getInstance()
+   </notes>
+  </release>
+  <release>
+   <date>2018-02-27</date>
+   <time>09:19:24</time>
+   <version>
+    <release>6.0.5</release>
+    <api>6.0.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+add list 'NeedsCorrectionOwner' to SeedDMS_Core_DMS::getDocumentList()
+   </notes>
+  </release>
+  <release>
+   <date>2018-11-13</date>
+   <time>07:31:17</time>
+   <version>
+    <release>6.0.6</release>
+    <api>6.0.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+SeedDMS_Core_Folder::addContent() uses currently logged in user as uploader instead of owner
+SeedDMS_Core_DocumentContent::verifyStatus() will not set status to S_RELEASED
+if currently in S_DRAFT status und no workflow, review, approval, or revision
+is pending.
+   </notes>
+  </release>
+  <release>
+   <date>2020-02-17</date>
+   <time>09:16:48</time>
+   <version>
+    <release>6.0.7</release>
+    <api>6.0.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+SeedDMS_Core_Document::getTimeline() returns revision only for latest content
+add callback onSetStatus in SeedDMS_Core_DocumentContent::setStatus()
+add new list type 'DueRevision' in SeedDMS_Core_DMS::getDocumentList()
+a revision can also be started if some revisors have already reviewed the document
+remove a user from all its process can also be used to set a new user
+   </notes>
+  </release>
+  <release>
+   <date>2020-03-02</date>
+   <time>09:43:12</time>
+   <version>
+    <release>6.0.8</release>
+    <api>6.0.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- no changes, just keep same version as seeddms application
+   </notes>
+  </release>
+  <release>
+   <date>2020-05-14</date>
+   <time>09:43:12</time>
+   <version>
+    <release>6.0.9</release>
+    <api>6.0.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- no changes, just keep same version as seeddms application
+   </notes>
+  </release>
+  <release>
+   <date>2020-05-22</date>
+   <time>09:43:12</time>
+   <version>
+    <release>6.0.10</release>
+    <api>6.0.10</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+SeedDMS_Core_DocumentContent::delRevisor() returns -4 if user has already made a revision
+   </notes>
+  </release>
+  <release>
+   <date>2020-06-05</date>
+   <time>09:43:12</time>
+   <version>
+    <release>6.0.11</release>
+    <api>6.0.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+SeedDMS_Core_DMS::filterAccess() properly checks for documents
+   </notes>
+  </release>
+  <release>
+   <date>2020-06-05</date>
+   <time>09:43:12</time>
+   <version>
+    <release>6.0.12</release>
+    <api>6.0.12</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+   </notes>
+  </release>
+  <release>
+   <date>2020-09-29</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.13</release>
+    <api>6.0.13</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- SeedDMS_Folder_DMS::getAccessList() and getDefaultAccess() do not return fals anymore if the parent does not exists. They just stop inheritance.
+   </notes>
+  </release>
+  <release>
+   <date>2021-01-04</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.14</release>
+    <api>6.0.14</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+better error checking in SeedDMS_Core_Document::cancelCheckOut()
+   </notes>
+  </release>
+  <release>
+   <date>2021-04-13</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.15</release>
+    <api>6.0.15</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add searching for revision date
+- expired documents can be skipped from counting in countTasks()
+- SeedDMS_Core_DMS::getDocumentList() uses ambiguous column name when sorting by status
+- add list type SleepingReviseByMe to SeedDMS_Core_DMS::getDocumentList()
+- parameter 2 of SeedDMS_Core_DMS::getDocumentList() is treated as number of
+  days for list DueRevisions
+   </notes>
+  </release>
+  <release>
+   <date>2021-05-07</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.16</release>
+    <api>6.0.16</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+   </notes>
+  </release>
+  <release>
+   <date>2021-12-11</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.17</release>
+    <api>6.0.17</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.1.24
+   </notes>
+  </release>
+  <release>
+   <date>2022-04-22</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.18</release>
+    <api>6.0.18</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.1.25
+- fix searching for document content with a custom attribute having a value set
+- SeedDMS_Core_DocumentContent::getWorkflow() has optional parameter to return data from table tblWorkflowDocumentContent
+   </notes>
+  </release>
+  <release>
+   <date>2022-05-20</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.19</release>
+    <api>6.0.19</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.1.26
+- removeFromProcesses() will not touch documents for which the new user does not have at least read access
+   </notes>
+  </release>
+  <release>
+   <date>2022-09-18</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.20</release>
+    <api>6.0.20</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.1.27 merged
+- SeedDMЅ_Core_DMS::getDocumentsInRevision() returns status from revision log
+   </notes>
+  </release>
+  <release>
+   <date>2022-11-18</date>
+   <time>13:44:55</time>
+   <version>
+    <release>6.0.21</release>
+    <api>6.0.21</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- all changes from 5.1.28 merged
+   </notes>
+  </release>
+ </changelog>
+</package>

@@ -1,0 +1,216 @@
+Hooks
+======
+
+Attention: the api for hooks isn't stable yet!
+
+Hooks in SeedDMS are user definied methods which are being called by
+the application. The SeedDMS Core also has hooks which are being
+called from the core itself. They are not subject of this document.
+The SeedDMS application distinguishes between
+
+* view hooks and
+* controller hooks
+
+view hooks usually return some html output which is send to the browser
+and either replaces the default output or adds additional information.
+A view hooks which returns null will be considered as not being called
+at all. If the hook is expected to return something, it must be either
+a string or an array of strings.
+
+controller hooks implement additional functions which either replace
+existing functions or add new ones. If such a hook returns null then
+this is treated as if the hook was not called. If the hook returns
+false it will prevent other hooks implementing the same function from
+being called. All other return values will not stop other hooks from
+being called. A controller hook may set the error msg of the calling
+controller.
+
+Currently available controller hooks
+------------------------------------
+AddDocument::preAddDocument
+  Called before a new document will be added
+
+  If the hook returns false the document will not be added and the error msg
+  set by the hook will be issued. This hook is called before the parameters
+  are fetch from the controller. Therefore it is possible to modify them
+  in this hook.
+
+AddDocument::addDocument
+  Called when the new document is to be added
+
+	This hook can be used to replace the code for adding a document. In
+	that case it must return a document or false. If
+	the hook does not return null, the original code for adding the
+	document will be skipped.
+
+AddDocument::postAddDocument
+  Called after a new document has been added
+
+  This hook will be called after a document was added, both by the
+	original code and within the hook addDocument. The hook is not called
+	if adding the document failed. The document will be passed to the hook.
+	The return value of this hook should always be null.
+
+AddDocument::preIndexDocument
+  Called before a new document will be indexed
+
+  This hook will be called after the document was added and before
+  the hook postAddDocument. The parameters passed
+  are the document and the indexed document. Returning false will prevent
+  the document from being indexed.
+
+EditDocument::editDocumentAttribute
+  Called for each custom document attribute
+
+  This hook will be called for each custom attribute to ouput the form entry.
+  The parameters passed are the document and the attribute definition.
+  Returning an empty array will prevent the attribute from being show.
+  Returning an array with two elements will pass those element to the formField
+  method. A returned string will be output as is.
+
+EditDocument::addDocumentAttributes
+  Called after all custom document attributes has been output
+
+  This hook will be called right after the document attributes have been shown.
+	The return value is either an array with two elements or a string.
+	The string will be output as is, the array will be passed to the method formField.
+
+UpdateDocument::preUpdateDocument
+  Called before a new document will be updated
+
+  If the hook returns false the document will not be updated and the error msg
+  set by the hook will be issued. This hook is called before the parameters
+  are fetch from the controller. Therefore it is possible to modify them
+  in this hook.
+
+UpdateDocument::updateDocument
+  Called when the document is to be updated
+
+  This hook can be used to replace the code for updating a document. In
+  that case it must return a document content or false. If
+  the hook returns null, the original code for adding the
+  document will be executed.
+
+UpdateDocument::postUpdateDocument
+  Called after a new document has been updated
+
+  This hook will be called after a document was updated, both by the
+	original code and within the hook addDocument.
+	The document and content will be passed to the hook.
+	The return value of this hook should always be null.
+
+UpdateDocument::preIndexDocument
+  Called before an updated document will be indexed
+
+  This hook will be called after the document was updated and before
+  the hook postUpdateDocument. The parameters passed
+  are the document and the indexed document. Returning false will prevent
+  the document from being indexed.
+
+RemoveDocument::preRemoveDocument
+  Called before a document will be removed
+
+  If the hook returns false the document will not be removed and the error msg
+  set by the hook will be issued.
+
+RemoveDocument::removeDocument
+  Called when the document is to be removed
+	
+	If the hook returns null the
+  regular document removal will happen.
+
+RemoveDocument::postRemoveDocument
+  Called after a document was removed
+
+  This hook will be called after a document was removed, both by the
+	original code and within the hook removeDocument. It will not be
+	called if removing the document failed.
+	The return value of this hook should always be null.
+
+RemoveFolder::preRemoveFolder
+  Called before a folder will be removed
+
+  If the hook returns false the folder will not be removed and the error msg
+  set by the hook will be issued.
+
+RemoveFolder::removeFolder
+  Called for removing the folder.
+	
+	If the hook returns null the regular folder removal will happen.
+	Keep in mind, that the hook function must also update the
+	full text index.
+
+RemoveFolder::postRemoveFolder
+  Called after a document was removed
+
+  This hook will be called after a folder was removed, both by the
+	original code and within the hook removeFolder. It will not be
+	called if removing the folder failed.
+	The return value of this hook should always be null.
+
+EditFolder::preEditFolder
+  Called before a folder will be updated
+
+  If the hook returns false the folder will not be updated and the error msg
+  set by the hook will be issued. This hook is called before the parameters
+  are fetch from the controller. Therefore it is possible to modify them
+  in this hook.
+
+EditFolder::EditFolder
+  Called when the folder is to be updated
+
+	This hook can be used to replace the code for updating a folder. If
+	the hook returns null, the original code for adding the
+	document will be executed.
+
+EditFolder::postEditFolder
+  Called after a folder was updated
+
+  This hook will be called after a folder was updated, both by the
+	original code and within the hook removeFolder. It will not be
+	called if updating the folder failed.
+	The return value of this hook should always be null.
+
+TransferDocument::preTransferDocument
+
+TransferDocument::transferDocument
+
+TransferDocument::postTransferDocument
+
+ViewOnline::version
+  Called when a document is downloaded for online view
+
+Download::version
+  Called when a document is downloaded for saving on disk
+
+Login::preLogin
+  Called before a user is logged in
+
+Login::authenticate
+  Called before any other authentication is done
+
+	If this hooks returns a user, no other authentication will be done.
+	If it returns false, the login fails as well.
+
+Login::restrictLogin
+  Called right before the user is considered to be logged in
+
+  This hook can contain a last check which keeps the user from being
+	logged in. Return false to stop login. The authenticated user is
+	passed to the hook.
+
+Login::postLogin
+  Called after user in fully logged in
+
+  The logged in user is passed to the hook.
+
+Login::loginFailed
+  Called if authentication failed
+
+Logout::postLogout
+  Called after user is logged out
+
+IndexDocument::preIndexDocument
+
+Currently available view hooks
+------------------------------------

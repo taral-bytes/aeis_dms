@@ -1,0 +1,23 @@
+{
+    "name": "seeddms/preview",
+    "description": "Create Preview images, pdf and txt for for SeedDMS ",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Seeddms\\Preview\\": "Preview/"
+        },
+        "classmap": ["Preview/"]
+    },
+    "authors": [
+        {
+            "name": "Uwe Steinmann",
+            "email": "info@seeddms.org"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+
+}

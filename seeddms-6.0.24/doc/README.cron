@@ -1,0 +1,42 @@
+Running the scheduler
+======================
+
+Since version 6 of SeedDMS a scheduler is implemented which runs
+scheduled tasks. Such tasks must be implemented in an extension
+and can be scheduled by the administrator within the user interface.
+
+In order to check frequently for tasks ready to run, a system cron job
+must be installed. On Linux this can be done by adding the following line
+to the crontab
+
+*/5 * * * * /var/www/seeddms60x/seeddms/utils/seeddms-schedulercli --mode=run
+
+(Of course you need to change the path to `seeddms-schedulercli`)
+
+This will install a cronjob running every 5 minutes. `seeddms-schedulercli` will check
+for tasks ready to run and execute them in that case. You can decrease the time between
+two calls of the cronjob, but keep in mind that seeddms tasks may take longer and
+are being started again before the previous task has been ended.
+
+If the configuration file of SeedDMS is not found, its path can be passed
+on the command, though this should not be needed in a regular installation
+obeying the directory structure of the quickstart archive.
+
+*/5 * * * * /var/www/seeddms60x/seeddms/utils/seeddms-schedulercli --config /var/www/seeddms60x/seeddms/conf/settings.xml --mode=run
+
+For testing purposes it may be usefull to run `seeddms-schedulercli` in list mode.
+
+seeddms-schedulercli --mode=list
+
+This will just list all tasks and its scheduled exection time. Tasks ready to run,
+because its scheduled execution time is already in the past will be marked with
+a `*`. Tasks which are disabled will be marked with a `-`.
+
+Executing `seeddms-schedulercli` in `dryrun` mode will behave just like in `run` mode
+but instead of running the task it will just issue a line.
+
+Instead of running utils/seeddms-schedulercli you may as well access
+op/op.Cron.php which also runs all scheduled tasks. On Linux you do this
+by setting up a cronjob like
+
+*/5 * * * * wget -q -O - "http://<your domain>/op/op.Cron.php"

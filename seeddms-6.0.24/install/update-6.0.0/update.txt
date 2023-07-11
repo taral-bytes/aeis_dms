@@ -1,0 +1,52 @@
+Caution when you update seeddms with workflow mode `advanced`
+=============================================================
+
+The previous database layout for tracking the workflow state of a
+document content was not very well done. It did not allow to run
+the document through another workflow at a later time, expecially
+the same workflow, e.g. for a scheduled revision of a document.
+
+Technical details
+==================
+This update modifies the tables tblWorkflowDocumentContent and
+tblWorkflowLog. It adds a new autoincrement field as a primary key
+(id) to tblWorkflowDocumentContent and references that field in
+tblWorkflowLog (workflowdocumentcontent). Till now the two tables
+where linked by the fields `document`, `version`, and `workflow` which will
+be replaced by the two new fields. The fields `document`, `version`, and
+`workflow` will be removed from tblWorkflowLog. tblWorkflowDocumentContent
+contained just the workflows currently active for a particlar document.
+From now on the table will also contain finished workflows, which
+will have the field `state` set to null. This allows to run even the
+same workflow again and still be able to distinguish the log entries.
+
+MySQL
+------
+
+The update process will first add the new auto incrementing, primary
+field to tblWorkflowDocumentContent and a referencing field to
+tblWorkflowLog. It will then fill out the referencing field with the
+automatically incremented field value from tblWorkflowDocumentContent
+by joining the two tables with its common fields document, version,
+and workflow.  This will not fill out all referencing field values,
+because once a workflow has ended the record in
+tblWorkflowDocumentContent will be deleted and just the records in
+tblWorkflowLog are kept. The still missing records in
+tblWorkflowDocumentContent for already completed workflows will be
+reconstructed from the records in tblWorkflowLog which do not have a
+reference to tblWorkflowDocumentContent yet. Once that is done the
+referencing field in tblWorkflowLog can be filled in a second pass.
+The date of the new records in tblWorkflowDocumentContent will be
+taken from the last record for that workflow in tblWorkflowLog.  The
+state of the new records will be set null, indicating that this
+workflow is no longer active.
+
+SQLite
+-------
+
+The update process will first create new table for tblWorkflowDocumentContent
+containing a new field for the primary key field. It then copies the
+records from the old table to the new table. The missing records for
+workflows which has been finished already are recreated from the old
+table `tblWorkflowLog`. Which is then replaced by a new table having
+the foreign key to table `tblWorkflowDocumentContent`.

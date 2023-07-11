@@ -1,0 +1,139 @@
+Conversion to text for fulltext search
+=======================================
+
+text/plain
+text/csv
+application/csv
+  cat '%s'
+
+application/pdf
+  pdftotext -nopgbrk %s - | sed -e 's/ [a-zA-Z0-9.]\{1\} / /g' -e 's/[0-9.]//g'
+
+	If pdftotext takes too long on large document you may want to pass parameter
+	-l to specify the last page to be converted
+
+  mutool draw -F txt -q -N -o - %s 
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  docx2txt '%s' -
+
+application/msword
+  catdoc %s
+
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  xlsx2csv -d tab %s
+
+application/vnd.ms-excel
+  xls2csv -d tab %s
+
+text/html
+  html2text %s
+
+Many office formats
+  unoconv -d document -f txt --stdout '%s'
+
+Apache Tika is another option for creating plain text from various document
+types. Just use curl to send the document to your tika server and get the
+plain text in return.
+
+curl -s -T '%s' http://localhost:9998/tika --header 'Accept: text/plain'
+
+Conversion to pdf for pdf preview
+==================================
+
+text/plain
+text/csv
+application/csv
+application/vnd.oasis.opendocument.text
+application/msword
+application/vnd.wordperfect
+text/rtf
+  unoconv -d document -f pdf --stdout -v '%f' > '%o'
+
+image/png
+image/jpg
+image/jpeg
+  convert -density 300 '%f' 'pdf:%o'
+
+image/svg+xml
+	cairosvg -f pdf -o '%o' '%f'
+
+application/vnd.ms-powerpoint
+application/vnd.openxmlformats-officedocument.presentationml.presentation
+application/vnd.oasis.opendocument.presentation
+  unoconv -d presentation -f pdf --stdout -v '%f' > '%o'
+
+application/vnd.ms-excel
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+application/vnd.oasis.opendocument.spreadsheet
+  unoconv -d spreadsheet -f pdf --stdout -v '%f' > '%o'
+
+message/rfc822
+  java -jar emailconverter-2.5.3-all.jar '%f' -o '%o'
+
+	The emailconverter can be obtained from https://github.com/nickrussler/email-to-pdf-converter
+	It requires wkhtmltopdf which is part of debian.
+
+Conversion to png for preview images
+=====================================
+
+If you have problems running convert on PDF documents then read this page
+https://askubuntu.com/questions/1081895/trouble-with-batch-conversion-of-png-to-pdf-using-convert
+It basically instructs you to comment out the line
+
+<policy domain="coder" rights="none" pattern="PDF" />
+
+in /etc/ImageMagick-6/policy.xml
+
+convert determines the format of the converted image from the extension of
+the output filename. SeedDMS usually sets a propper extension when running
+the command, but nevertheless it is good practice to explicitly set the output
+format by prefixing the output filename with 'png:'. This is of course always
+needed if the output goes to stdout.
+
+image/jpg
+image/jpeg
+image/png
+  convert -resize %wx '%f' 'png:%o'
+
+image/svg+xml
+	cairosvg -f png --output-width %w -o '%o' '%f'
+
+text/plain
+  convert -density 100 -resize %wx 'text:%f[0]' 'png:%o'
+
+application/pdf
+  gs -dBATCH -dNOPAUSE -sDEVICE=png16m -dPDFFitPage -r72x72 -sOutputFile=- -dFirstPage=1 -dLastPage=1 -q '%f' | convert -resize %wx png:- '%o'
+
+  convert -density 100 -resize %wx '%f[0]' 'png:%o'
+
+  mutool draw -F png -w %w -q -N -o %o %f 1
+
+application/postscript
+  convert -density 100 -resize %wx '%f[0]' 'png:%o'
+
+text/plain
+  a2ps -1 -a1 -R -B -o - '%f' | gs -dBATCH -dNOPAUSE -sDEVICE=png16m -dFirstPage=1 -dLastPage=1 -dPDFFitPage -r72x72 -sOutputFile=- -q - | convert -resize %wx png:- 'png:%o'
+
+	On Linux systems you will have to set the desired value in /etc/papersize for a2ps
+	e.g. a4, or letter
+
+application/msword
+application/vnd.oasis.opendocument.spreadsheet
+application/vnd.oasis.opendocument.text
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+application/vnd.ms-excel
+application/vnd.openxmlformats-officedocument.wordprocessingml.document
+text/rtf
+application/vnd.ms-powerpoint
+text/csv
+application/csv
+application/vnd.wordperfect
+  unoconv -d document -e PageRange=1 -f pdf --stdout -v '%f' | gs -dBATCH -dNOPAUSE -sDEVICE=pngalpha -dPDFFitPage -r72x72 -sOutputFile=- -dFirstPage=1 -dLastPage=1 -q - | convert -resize %wx png:- 'png:%o'
+
+video/webm
+video/mp4
+  This will take 12th frame of a video and converts into a png. It requires
+  ffmpeg to be installed.
+
+  convert -resize %wx '%f[12]' 'png:%o'

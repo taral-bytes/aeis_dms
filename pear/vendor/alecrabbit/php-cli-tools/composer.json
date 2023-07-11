@@ -1,0 +1,39 @@
+{
+  "name": "alecrabbit/php-cli-tools",
+  "type": "library",
+  "description": "CLI tools for php.",
+  "keywords": [
+    "console",
+    "ansi",
+    "control",
+    "terminal",
+    "width",
+    "height",
+    "title",
+    "cli"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=7.2"
+  },
+  "require-dev": {
+    "alecrabbit/php-helpers": "^0.7 || ^0.8 ",
+    "nunomaduro/collision": "^3.0",
+    "phpunit/phpunit": "^8.0",
+    "symfony/var-dumper": "^4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "AlecRabbit\\Cli\\": "src\\Cli"
+    },
+    "files": [
+      "src/bootstrap.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AlecRabbit\\Tests\\": "tests"
+    }
+  },
+  "minimum-stability": "beta"
+}

@@ -1,0 +1,7 @@
+Jul 11 14:46:16  [info] -- (::1) op.Login.php 
+Jul 11 14:46:16  [info] Authentication service 'db'
+Jul 11 14:46:16  [error] Authentication service 'db': Authentication of user 'root' disregarded.
+Jul 11 14:46:16  [error] -- (::1) op.Login.php login failed
+Jul 11 14:46:23  [info] -- (::1) op.Login.php 
+Jul 11 14:46:23  [info] Authentication service 'db'
+Jul 11 14:46:23  [info] Authentication service 'db': Authentication of user 'admin' successful.

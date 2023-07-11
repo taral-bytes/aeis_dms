@@ -1,0 +1,18 @@
+Adding authentication failure check for fail2ban
+=================================================
+
+You will have to use 5.1.10 for this to work.
+
+Add a filter /etc/fail2ban/filter.d/seeddms.conf with the content
+
+[Definition]
+
+failregex = \[error\] -- \(<HOST>\) op.Login login failed
+
+then configure a new jail in /etc/fail2ban/jail.d/seeddms.conf
+
+[seeddms]
+enabled = yes
+port = http,https
+filter  = seeddms
+logpath = /home/www-data/seeddms-demo/data/log/*.log

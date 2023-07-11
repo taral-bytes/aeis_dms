@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>SeedDMS_SQLiteFTS</name>
+ <channel>pear.php.net</channel>
+ <summary>Fulltext search based on sqlite for SeedDMS</summary>
+ <description>SeedDMS is a web based document management system (DMS). This is
+ the fulltext search engine for it, based on SQLite FTS.</description>
+ <lead>
+  <name>Uwe Steinmann</name>
+  <user>steinm</user>
+  <email>uwe@steinmann.cx</email>
+  <active>yes</active>
+ </lead>
+ <date>2023-01-09</date>
+ <time>08:57:44</time>
+ <version>
+  <release>1.0.18</release>
+  <api>1.0.18</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+ <notes>
+- add optional parameter $order to SeedDMS_SQLiteFTS_Indexer::find()
+- add optional parameters $query and $col to SeedDMS_SQLiteFTS_Indexer::terms()
+- IndexedDocument() accepts a callable for conversion to text
+- remove stop words from content
+ </notes>
+ <contents>
+  <dir baseinstalldir="SeedDMS" name="/">
+   <dir name="SQLiteFTS">
+    <file name="Indexer.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="IndexedDocument.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Document.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="QueryHit.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Search.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Term.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Field.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+    <file name="Exception.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /SQLiteFTS -->
+   <dir name="tests">
+   </dir> <!-- /tests -->
+   <file name="SQLiteFTS.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.3.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.5.4</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <date>2015-08-10</date>
+   <time>21:13:13</time>
+   <version>
+    <release>1.0.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- initial release
+   </notes>
+  </release>
+  <release>
+   <date>2015-11-16</date>
+   <time>09:07:07</time>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add __get() to SQLiteFTS_Document because class.IndexInfo.php access class variable title which doesn't exists
+   </notes>
+  </release>
+  <release>
+   <date>2016-01-10</date>
+   <time>09:07:07</time>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- check if index exists before removing it when creating a new one
+   </notes>
+  </release>
+  <release>
+   <date>2016-02-01</date>
+   <time>09:15:01</time>
+   <version>
+    <release>1.0.3</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add command for indexing postѕcript files
+   </notes>
+  </release>
+  <release>
+   <date>2016-03-15</date>
+   <time>15:59:07</time>
+   <version>
+    <release>1.0.4</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- make it work with sqlite3 &lt; 3.8.0
+   </notes>
+  </release>
+  <release>
+   <date>2016-03-29</date>
+   <time>08:09:48</time>
+   <version>
+    <release>1.0.5</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- set last parameter of stream_select() to 200000 micro sec. in case the timeout in sec. is set to 0
+   </notes>
+  </release>
+  <release>
+   <date>2016-03-29</date>
+   <time>08:09:48</time>
+   <version>
+    <release>1.0.6</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fix calculation of timeout (see bug #269)
+   </notes>
+  </release>
+  <release>
+   <date>2017-03-01</date>
+   <time>15:53:24</time>
+   <version>
+    <release>1.0.7</release>
+    <api>1.0.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- catch exception in execWithTimeout()
+   </notes>
+  </release>
+  <release>
+   <date>2017-12-04</date>
+   <time>11:00:40</time>
+   <version>
+    <release>1.0.8</release>
+    <api>1.0.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- allow conversion commands for mimetypes with wildcards
+   </notes>
+  </release>
+  <release>
+   <date>2018-01-30</date>
+   <time>11:00:40</time>
+   <version>
+    <release>1.0.9</release>
+    <api>1.0.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- execWithTimeout() reads data from stderr and saves it into error msg
+   </notes>
+  </release>
+  <release>
+   <date>2018-04-11</date>
+   <time>11:00:40</time>
+   <version>
+    <release>1.0.10</release>
+    <api>1.0.10</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- IndexedDocument() remembers cmd and mimetype
+   </notes>
+  </release>
+  <release>
+   <date>2019-11-28</date>
+   <time>11:00:40</time>
+   <version>
+    <release>1.0.11</release>
+    <api>1.0.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- Set 'created' in index to creation date of indexed content (was set to current
+timestamp)
+   </notes>
+  </release>
+  <release>
+   <date>2020-09-02</date>
+   <time>08:57:44</time>
+   <version>
+    <release>1.0.12</release>
+    <api>1.0.12</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- Index users with at least read access on a document
+   </notes>
+  </release>
+  <release>
+   <date>2020-09-02</date>
+   <time>08:57:44</time>
+   <version>
+    <release>1.0.13</release>
+    <api>1.0.13</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add user to list of terms
+   </notes>
+  </release>
+  <release>
+   <date>2020-09-11</date>
+   <time>08:57:44</time>
+   <version>
+    <release>1.0.14</release>
+    <api>1.0.14</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add searching for document status
+- search even if query is empty	(will find all documents)
+- parameters for SeedDMS_SQLiteFTS_Search::search() has changed
+- SeedDMS_Lucene_Search::search() returns array of hits, count and facets
+- pass config array instead of index directory to SeedDMS_Lucene_Indexer::create()
+  and SeedDMS_Lucene_Indexer::open()
+   </notes>
+  </release>
+  <release>
+   <date>2020-12-12</date>
+   <time>08:57:44</time>
+   <version>
+    <release>1.0.15</release>
+    <api>1.0.15</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- add indexing folders
+   </notes>
+  </release>
+  <release>
+   <date>2021-05-10</date>
+   <time>08:57:44</time>
+   <version>
+    <release>1.0.16</release>
+    <api>1.0.16</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- close pipes in execWithTimeout(), also return exit code of command
+- add support for fts5 (make it the default)
+- add class SeedDMS_SQLiteFTS_Field
+   </notes>
+  </release>
+  <release>
+   <date>2022-03-04</date>
+   <time>08:57:44</time>
+   <version>
+    <release>1.0.17</release>
+    <api>1.0.17</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- throw exeption in find() instead of returning false
+- fix query if rootFolder or startFolder is set
+   </notes>
+  </release>
+ </changelog>
+</package>

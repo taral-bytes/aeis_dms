@@ -1,0 +1,1 @@
+../seeddms/index.php

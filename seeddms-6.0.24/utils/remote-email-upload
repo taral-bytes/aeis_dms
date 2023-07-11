@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+DIALOG_PROG=dialog
+DIMENSION=(`stty size`)
+HEIGHT=`expr ${DIMENSION[0]} - 4`
+WIDTH=`expr ${DIMENSION[1]} - 4`
+
+# run_dialog() {{{
+run_dialog()
+{
+	test -z "$NO_CLEAR" && clear
+	if [ "NO" = "$INTERACTIVE" ]; then
+		true
+	else
+		$DIALOG_PROG --title "Type1 font setup utility" "$@"
+	fi
+}
+# }}}
+
+# list_servers() {{{
+list_servers()
+{
+	test -z "$NO_CLEAR" && clear
+	servers=
+#	$DIALOG_PROG --title "Servers" --menu Server $HEIGHT 60 2 "`grep "^\[.*\]$" ~/.seeddms-upload.conf | sed -e "/^\[.*\]$/s/[]\[]//g"`"
+	$DIALOG_PROG --title "Servers" --menu Server $HEIGHT 60 2 alksfjl lasjfl alsfjl alsjf
+}
+# }}}
+
+if [ $# -ne 0 ] ; then
+	echo "Usage: " $(basename $0)
+	echo
+	echo "The following shell variables can be set in ~/.seeddms-upload.conf"
+	echo "  baseurl: url of restapi service"
+	echo "  username: name of user to be used"
+	echo "  password: password of user to be used. If not set, it will be asked."
+	echo "  targetfolder: id of folder where file is uploaded"
+	exit 0
+fi
+
+if [ -f ~/.seeddms-upload.conf ] ; then
+	. ~/.seeddms-upload.conf
+fi
+
+if [ -z "$baseurl" ] ; then
+	echo "Missing base url"
+	exit 1
+fi
+
+if [ -z "$username" ] ; then
+	echo "Missing username"
+	exit 1
+fi
+
+if [ -z "$targetfolder" ] ; then
+	echo "Missing target folder"
+	exit 1
+fi
+
+if [ -z "$password" ] ; then
+	read -s -p "Password: " password
+	echo
+fi
+
+cookiefile=/tmp/cookies.txt
+trap 'rm -f $cookiefile' EXIT
+
+message=$(cat)
+
+mail_date=$(<<<"$message" grep -oPm 1 '^Date: ?\K.*')
+formatted_date=$(date -d"$mail_date" +%Y%m%d)
+# Get the first line of the subject, and change / to ∕ so it's not a subdirectory
+subject=$(<<<"$message" grep -oPm 1 '^Subject: ?\K.*' | sed 's,/,∕,g' | sed 's/ *$//g')
+
+if [[ $formatted_date == '' ]]; then
+  echo Error: no date parsed
+	exit 1
+elif [[ $subject == '' ]]; then
+	echo Warning: no subject found
+	subject="no-subject"
+fi
+
+origfilename=$(php -r "echo urlencode('$formatted_date'.'-'.'$subject'.'.eml');")
+
+# First login
+data=$(curl -s -c $cookiefile --data "user=$username&pass=$password" $baseurl/login)
+success=$(echo "$data" | jq .success)
+if [ "$success" = "false" ] ; then
+	echo "Could not login! Check your credentials";
+	echo $data | jq
+	exit 1;
+fi
+
+# Upload message
+data=$(echo "${message}" | curl -s -b $cookiefile -T - "$baseurl/folder/$targetfolder/document?name=$origfilename&origfilename=$origfilename")
+success=$(echo "$data" | jq .success)
+if [ "$success" = "false" ] ; then
+	echo $data | jq
+	exit 1;
+fi
+
+echo $data | jq

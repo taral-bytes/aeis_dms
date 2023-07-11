@@ -1,0 +1,23 @@
+{
+    "name": "seeddms/lucene",
+    "description": "Lucene based fulltext search for SeedDMS ",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Seeddms\\Lucene\\": "Lucene/"
+        },
+        "classmap": ["Lucene/"]
+    },
+    "authors": [
+        {
+            "name": "Uwe Steinmann",
+            "email": "info@seeddms.org"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    }
+
+}

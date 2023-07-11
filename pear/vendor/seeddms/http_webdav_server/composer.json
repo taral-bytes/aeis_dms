@@ -1,0 +1,16 @@
+{
+    "name": "seeddms/http_webdav_server",
+    "description": "WebDAV Server for SeedDMS",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "autoload": {
+        "classmap": ["HTTP/"]
+    },
+    "authors": [
+        {
+            "name": "Uwe Steinmann",
+            "email": "info@seeddms.org"
+        }
+    ]
+}

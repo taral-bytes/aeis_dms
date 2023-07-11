@@ -1,0 +1,59 @@
+OCR
+====
+
+SeedDMS itself has no support for optical character recognition (OCR)
+because it does not care about the content of file. Though, external
+OCR software can be used to convert an image into text and index it
+by the full text search engine.
+
+The following script can be use to convert a scanned image into pdf
+with a text layer added. The script actually takes this file to
+ran it through pdftotext. It was published in the seeddms forum
+https://sourceforge.net/p/seeddms/discussion/general/thread/4ec5973d/
+
+
+#!/bin/bash
+inputpdf=$1
+temp_folder=/tmp/seedinput/$(date +"%Y_%m_%d_%H%M%S")/
+lockfile=/tmp/seed
+protokolldatei=./tesser_syslog
+cores=2
+
+mkdir -p $lockfile
+
+while [ -e "$lockfile"/"`basename $0`" ];
+do
+    sleep 5
+done
+
+if ( set -o noclobber; echo "locked" > "$lockfile"/"`basename $0`"); then
+
+trap 'rm -f "$lockfile"/"`basename $0`";  echo $(date) " Lockdatei wird geloescht: " $lockfile"/"`basename $0` Aufrufparameter: $* >> $protokolldatei ;rm -r $temp_folder;  exit $?'  INT TERM KILL EXIT
+  #das Datum mit dem Scriptnamen in die Protokolldatei schreiben
+  echo $(date) " Lockdatei erstellt: " $lockfile"/"`basename $0` >> $protokolldatei
+
+else
+    #Script beenden falls Lockdatei nicht erstellt werden konnte
+    echo $(date) " Programm wird beendet, Lockdatei konnte nicht erstellt werden:  $lockfile"/"`basename $0` Aufrufparameter: $* " >> $protokolldatei
+    exit 1
+fi
+
+mkdir -p $temp_folder
+
+$(pdftotext -raw $1 - 1> $temp_folder''tmp.txt )
+pdf_contents=`cat $temp_folder''tmp.txt`
+pdf_contents=`echo "$pdf_contents" | tr -dc '[:print:]'`
+if [ -z "$pdf_contents" ]; then
+    convert -density 300 -quality 95 $inputpdf +adjoin $temp_folder''image%03d.jpg
+    find $temp_folder -name '*.jpg'| parallel --gnu -j $cores tesseract -l deu --psm 6 {} {} pdf
+
+num=`find $temp_folder -name '*.pdf'| wc -l`
+if [ "$num" -gt "1" ]; then
+    pdfunite $temp_folder*.pdf $temp_folder''tmp.pdf
+else
+    mv $temp_folder*.pdf $temp_folder''tmp.pdf
+fi
+    pdftotext $temp_folder''tmp.pdf $temp_folder''tmp.txt
+    mv $temp_folder''tmp.pdf $1
+fi
+cat $temp_folder''tmp.txt

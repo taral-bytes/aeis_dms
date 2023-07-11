@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ -z ${SEEDDMS_HOME+x} ]; then
+	parentdir=$(dirname "$0")
+	export SEEDDMS_HOME=$(dirname "$parentdir")
+#	echo "Setting SEEDDMS_HOME to:" $SEEDDMS_HOME
+#	echo "Please set SEEDDMS_HOME before running this script";
+#	exit 1;
+fi
+php -f ${SEEDDMS_HOME}/utils/schedulercli.php -- "$@"

@@ -1,0 +1,2221 @@
+<?php
+  header("Content-Type: text/plain");
+  include("../inc/inc.Settings.php");
+?>
+swagger: "2.0"
+info:
+  description: "This is the rest api of SeedDMS."
+  version: "1.0.0"
+  title: "Swagger SeedDMS"
+  termsOfService: "https://www.seeddms.org/terms/"
+  contact:
+    email: "info@seeddms.org"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url:
+    description: Current host server
+host: "<?php echo $_SERVER['HTTP_HOST']; ?>"
+basePath: "<?php echo $settings->_httpRoot; ?>restapi/index.php"
+tags:
+- name: "user"
+  description: "Operations about user"
+  externalDocs:
+    description: "Find out more about our store"
+    url: "https://www.seeddms.org"
+schemes:
+- "http"
+- "https"
+paths:
+  /login:
+    post:
+      tags:
+      - "account"
+      summary: "Log in"
+      description: "Log in by providing a username and password"
+      operationId: "login"
+      produces:
+        - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "user"
+        in: "formData"
+        type: "string"
+        description: "Name of user"
+        required: true
+      - name: "pass"
+        in: "formData"
+        type: "string"
+        description: "Password of user"
+        required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "403":
+          description: "Login failed"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid parameter"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /logout:
+    get:
+      tags:
+      - "account"
+      summary: "Log out"
+      description: "Log out"
+      operationId: "Kills the session and removes the cookie"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /account:
+    get:
+      tags:
+      - "account"
+      summary: "Get account data"
+      description: "Returns account data of logged in user"
+      operationId: "getAccount"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /account/fullname:
+    put:
+      tags:
+      - "account"
+      summary: "Set full name of account"
+      description: "Sets the full name of the currently logged in user"
+      operationId: "setAccountFullname"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+        - in: formData
+          name: email
+          type: string
+          description: "New full name"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /account/email:
+    put:
+      tags:
+      - "account"
+      summary: "Set email of account"
+      description: "Sets the email of the currently logged in user"
+      operationId: "setAccountEmail"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+        - in: formData
+          name: email
+          type: string
+          description: "New email"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /account/documents/locked:
+    get:
+      tags:
+      - "account"
+      summary: "Get locked documents by myself"
+      description: "Returns locked documents of logged in user"
+      operationId: "getLockedDocuments"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseDocuments"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /users:
+    get:
+      tags:
+      - "user"
+      summary: "Finds all users"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "getUsers"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUsers"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    post:
+      tags:
+      - "user"
+      summary: "Create user"
+      description: "This can only be done by the logged in user."
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - in: "formData"
+        name: "user"
+        description: "Login of user"
+        type: "string"
+        required: true
+      - in: "formData"
+        name: "pass"
+        description: "Password of user"
+        type: "string"
+        required: true
+      - in: "formData"
+        name: "name"
+        description: "Full name of user"
+        type: "string"
+        required: true
+      - in: "formData"
+        name: "email"
+        description: "Email of user"
+        type: "string"
+        required: false
+      - in: "formData"
+        name: "language"
+        description: "Language of user"
+        type: "string"
+        required: false
+      - in: "formData"
+        name: "theme"
+        description: "Theme of user"
+        type: "string"
+        required: false
+      - in: "formData"
+        name: "comment"
+        description: "Comment of user"
+        type: "string"
+        required: false
+      - in: "formData"
+        name: "role"
+        description: "Role of user (admin, user, guest)"
+        type: "string"
+        enum:
+          - admin
+          - user
+          - guest
+        required: false
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "409":
+          description: "User already exists"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error creating user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /users/{id}:
+    get:
+      tags:
+      - "user"
+      summary: "Find user by ID"
+      description: "Returns a single user"
+      operationId: "getUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of user to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user by ID"
+      description: "Delete a single user"
+      operationId: "deleteUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of user to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error deleting user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /users/{id}/disable:
+    put:
+      tags:
+      - "user"
+      summary: "Disable user by ID"
+      description: "Disable a single user"
+      operationId: "setDisabledUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of user to disable"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseUser"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /users/{id}/password:
+    put:
+      tags:
+      - "user"
+      summary: "Change password of user by ID"
+      description: "Change the password of a single user"
+      operationId: "changeUserPassword"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of user"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "formData"
+        name: "password"
+        type: "string"
+        description: "New password"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid parameter"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /groups:
+    get:
+      tags:
+      - "group"
+      summary: "Finds all groups"
+      description: "Return a list of all groups"
+      operationId: "getGroups"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseGroups"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    post:
+      tags:
+      - "group"
+      summary: "Create group"
+      description: "This can only be done by the logged in user."
+      operationId: "createGroup"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - in: "formData"
+        name: "name"
+        type: "string"
+        description: "Name of new group"
+        required: true
+      - in: "formData"
+        name: "comment"
+        type: "string"
+        description: "Comment of new group"
+        required: false
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseGroup"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "409":
+          description: "Group already exists"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error creating user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}:
+    get:
+      tags:
+      - "document"
+      summary: "Find document by ID"
+      description: "Returns a single document"
+      operationId: "getDocument"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseDocument"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "document"
+      summary: "Delete document by ID"
+      description: "Delete a single document"
+      operationId: "deleteDocument"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error deleting user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/preview/{version}/{width}:
+    get:
+      tags:
+      - "document"
+      summary: "Return preview of document"
+      description: "Returns the preview image of a given version of a document"
+      operationId: "getDocumentPreview"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "version"
+        in: "path"
+        description: "Version number of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "width"
+        in: "path"
+        description: "Width of preview image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "preview image file"
+          schema:
+            type: "file"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/content:
+    get:
+      tags:
+      - "document"
+      summary: "Return latest content of document"
+      description: "Returns the most current version of a document"
+      operationId: "getDocumentContent"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "content file"
+          schema:
+            type: "file"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/file/{fileid}:
+    get:
+      tags:
+      - "document"
+      summary: "Return certain attached file of document"
+      description: "Returns the attached file of a document"
+      operationId: "getDocumentFile"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "fileid"
+        in: "path"
+        description: "Id of file to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "attached file"
+          schema:
+            type: "file"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/version/{version}:
+    get:
+      tags:
+      - "document"
+      summary: "Return certain version of document"
+      description: "Returns the requested version of a document"
+      operationId: "getDocumentVersion"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "version"
+        in: "path"
+        description: "Version number of document to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "content file"
+          schema:
+            type: "file"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/version/{version}/attributes:
+    get:
+      tags:
+      - "document"
+      summary: "Return attributes of document version"
+      description: "Returns the attributes of a given document version"
+      operationId: "getDocumentContentAttributes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document whose attributes to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      - name: "version"
+        in: "path"
+        description: "Version number of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseAttributes"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document or version not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/version/{version}/attribute/{attrdefid}:
+    put:
+      tags:
+      - "document"
+      summary: "Set document version attribute"
+      description: "Sets the attribute value of a document version. If the value is an empty string the attribute will be deleted."
+      operationId: "setDocumentContentAttribute"
+      produces:
+        - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "version"
+        in: "path"
+        description: "Version number of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "attrdefid"
+        in: "path"
+        description: "ID of attribute definition"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "formData"
+        name: "value"
+        type: "string"
+        description: "Value of attribute"
+        required: true
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid attribute value, or setting an attribute not allowed for the type of object"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document, version or attribute definition not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/attributes:
+    get:
+      tags:
+      - "document"
+      summary: "Return attributes of document"
+      description: "Returns the attributes of a given document"
+      operationId: "getDocumentAttributes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document whose attributes to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseAttributes"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/attribute/{attrdefid}:
+    put:
+      tags:
+      - "document"
+      summary: "Set document attribute"
+      description: "Sets the attribute value of a document. If the value is an empty string the attribute will be deleted."
+      operationId: "setDocumentAttribute"
+      produces:
+        - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of document"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "attrdefid"
+          in: "path"
+          description: "ID of attribute definition"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "formData"
+          name: "value"
+          type: "string"
+          description: "Value of attribute"
+          required: true
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid attribute value, or setting an attribute not allowed for the type of object"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document or attribute definition not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/files:
+    get:
+      tags:
+      - "document"
+      summary: "Return attached files of document"
+      description: "Returns the attached files of a given document"
+      operationId: "getDocumentFiles"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document whose files to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseDocumentFiles"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/links:
+    get:
+      tags:
+      - "document"
+      summary: "Return links of document by ID"
+      description: "Returns the links of a given document"
+      operationId: "getDocumentLinks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document whose links to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseDocumentLinks"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/link/{targetid}:
+    post:
+      tags:
+      - "document"
+      summary: "Add link between documents"
+      description: "Adds a link from a source document to a target document"
+      operationId: "addDocumentLink"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of source document."
+        type: "integer"
+        required: true
+        format: "int64"
+      - name: "targetid"
+        in: "path"
+        description: "ID of target document."
+        type: "integer"
+        required: true
+        format: "int64"
+      - in: "formData"
+        name: "public"
+        description: "Set to true if link shall be public"
+        type: "boolean"
+        required: false
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/versions:
+    get:
+      tags:
+      - "document"
+      summary: "Return all versions of a document by ID"
+      description: "Returns the versions of a given document"
+      operationId: "getDocumentVersions"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document whose versions to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseDocumentContents"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/categories:
+    delete:
+      tags:
+      - "document"
+      summary: "Delete all categories of a document"
+      description: "Delete all categories from a given document"
+      operationId: "deleteDocumentCategories"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error deleting user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/category/{catid}:
+    post:
+      tags:
+      - "document"
+      summary: "Add a single category to document"
+      description: "Adds a single category to a document"
+      operationId: "addDocumentCategory"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document."
+        type: "integer"
+        required: true
+        format: "int64"
+      - name: "catid"
+        in: "path"
+        description: "ID of category."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "No document or category given"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "document"
+      summary: "Delete a single category of a document"
+      description: "Delete just one category with the given id from the given document"
+      operationId: "deleteDocumentCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "catid"
+        in: "path"
+        description: "ID of category to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error deleting user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /document/{id}/owner/{userid}:
+    post:
+      tags:
+      - "document"
+      summary: "Set owner of document"
+      description: "Set owner of document"
+      operationId: "setDocumentOwner"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of document."
+        type: "integer"
+        required: true
+        format: "int64"
+      - name: "userid"
+        in: "path"
+        description: "ID of user."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "No document or user given"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Document not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}:
+    get:
+      tags:
+      - "folder"
+      summary: "Find folder by ID"
+      description: "Returns a single folder"
+      operationId: "getFolder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of folder to return. ID=0 returns root folder."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseFolder"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "folder"
+      summary: "Delete folder by ID"
+      description: "Delete the folder with the given id"
+      operationId: "deleteFolder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of folder to delete."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/parent:
+    get:
+      tags:
+      - "folder"
+      summary: "Find parent of folder by ID"
+      description: "Returns the parent folder of a given folder"
+      operationId: "getFolderParent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of folder whose parent to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseFolder"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/children:
+    get:
+      tags:
+      - "folder"
+      summary: "Find children of folder by ID"
+      description: "Returns the children of a given folder"
+      operationId: "getFolderChildren"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of folder whose children to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseFolder"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/path:
+    get:
+      tags:
+      - "folder"
+      summary: "Return path of folder by ID"
+      description: "Returns the path of a given folder"
+      operationId: "getFolderPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of folder whose path to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseFolderPath"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/attributes:
+    get:
+      tags:
+      - "folder"
+      summary: "Return attributes of folder"
+      description: "Returns the attributes of a given folder"
+      operationId: "getFolderAttributes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of folder whose attributes to be returned."
+        type: "integer"
+        required: true
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseAttributes"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/attribute/{attrdefid}:
+    put:
+      tags:
+      - "folder"
+      summary: "Set folder attribute"
+      description: "Sets the attribute value of a folder. If the value is an empty string the attribute will be deleted."
+      operationId: "setFolderAttribute"
+      produces:
+        - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of folder"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "attrdefid"
+          in: "path"
+          description: "ID of attribute definition"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "formData"
+          name: "value"
+          type: "string"
+          description: "Value of attribute"
+          required: true
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid attribute value, or setting an attribute not allowed for the type of object"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder or attribute definition not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/folder:
+    post:
+      tags:
+      - "folder"
+      summary: "Create new subolder"
+      description: "Creates a new subfolder in the a given folder"
+      operationId: "createFolder"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of parent folder."
+        type: "integer"
+        required: true
+        format: "int64"
+      - in: "formData"
+        name: "name"
+        description: "Name of new folder"
+        type: "string"
+        required: true
+      - in: "formData"
+        name: "comment"
+        description: "Comment of new folder"
+        type: "string"
+        required: false
+      - in: "formData"
+        name: "sequence"
+        description: "Sequence of new folder"
+        type: "string"
+        required: false
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseFolder"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /folder/{id}/document:
+    post:
+      tags:
+      - "folder"
+      summary: "Create new document"
+      description: "Creates a new document in the a given folder"
+      operationId: "createDocument"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of parent folder."
+        type: "integer"
+        required: true
+        format: "int64"
+      - in: "formData"
+        name: "file"
+        type: "file"
+        description: "Content of new document"
+        required: true
+      - in: "formData"
+        name: "name"
+        description: "Name of new document"
+        type: "string"
+        required: true
+      - in: "formData"
+        name: "comment"
+        description: "Comment of new document"
+        type: "string"
+        required: false
+      - in: "formData"
+        name: "sequence"
+        description: "Sequence of new document"
+        type: "string"
+        required: false
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseDocument"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Folder not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /categories:
+    get:
+      tags:
+      - "category"
+      summary: "Finds all categories"
+      operationId: "getCategories"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseCategories"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    post:
+      tags:
+      - "category"
+      summary: "Create a new category"
+      operationId: "postCategories"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - in: "formData"
+        name: "name"
+        description: "Name of new category"
+        type: "string"
+        required: true
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseCategories"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "409":
+          description: "Category already exists"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error creating category"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /categories/{id}:
+    get:
+      tags:
+      - "category"
+      summary: "Find category by ID"
+      description: "Returns a single category"
+      operationId: "getCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseCategory"
+        "404":
+          description: "Category not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+    delete:
+      tags:
+      - "category"
+      summary: "Delete category by ID"
+      description: "Delete a single category"
+      operationId: "deleteCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of category to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "500":
+          description: "Error deleting user"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "404":
+          description: "Category not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /categories/{id}/name:
+    put:
+      tags:
+      - "category"
+      summary: "Set name of category"
+      description: "Sets the name of the category"
+      operationId: "changeCategoryName"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of category"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "formData"
+          name: "name"
+          type: "string"
+          description: "New name"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseCategory"
+        "400":
+          description: "Invalid parameter"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /attributedefinitions:
+    get:
+      tags:
+      - "attributedefinition"
+      summary: "Finds all attribute definitions"
+      operationId: "getAttributeDefinitions"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseAttributeDefinitions"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /attributedefinitions/{id}/name:
+    put:
+      tags:
+      - "attributedefinition"
+      summary: "Set name of attribute definition"
+      description: "Sets the name of the attribute definition"
+      operationId: "changeAttributeDefinitionName"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of attribute definition"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "formData"
+          name: "name"
+          type: "string"
+          description: "New name"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponseAttributeDefinition"
+        "400":
+          description: "Invalid parameter"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "403":
+          description: "No access"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /statstotal:
+    get:
+      tags:
+      - "misc"
+      summary: "Return various statistical data"
+      description: "Just returns the body content"
+      operationId: "getStatsTotal"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid status value"
+      security:
+      - api_key: []
+  /echo:
+    get:
+      tags:
+      - "misc"
+      summary: "Return what was send in the body"
+      description: "Just returns the body content"
+      operationId: "echoData"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid status value"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+definitions:
+  Role:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Role"
+  Group:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      comment:
+        type: "string"
+    xml:
+      name: "Group"
+  User:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        enum:
+          - user
+          - group
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      comment:
+        type: "string"
+      login:
+        type: "string"
+      email:
+        type: "string"
+      language:
+        type: "string"
+      theme:
+        type: "string"
+      role:
+        $ref: "#/definitions/Role"
+      hidden:
+        type: "boolean"
+      disabled:
+        type: "boolean"
+      isguest:
+        type: "boolean"
+      isadmin:
+        type: "boolean"
+    xml:
+      name: "User"
+  Document:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        enum:
+          - document
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      date:
+        type: "string"
+      comment:
+        type: "string"
+      keywords:
+        type: "string"
+      ownerid:
+        type: "integer"
+        format: "int64"
+      islocked:
+        type: "boolean"
+      sequence:
+        type: "number"
+      expires:
+        type: "string"
+      mimetype:
+        type: "string"
+      version:
+        type: "integer"
+        format: "int64"
+      version_comment:
+        type: "string"
+      version_date:
+        type: "string"
+      size:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Document"
+  DocumentContent:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      version:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "string"
+      comment:
+        type: "string"
+      mimetype:
+        type: "string"
+      filetype:
+        type: "string"
+      origfilename:
+        type: "string"
+      size:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "DocumentContent"
+  DocumentFile:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      version:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "string"
+      comment:
+        type: "string"
+      mimetype:
+        type: "string"
+      filetype:
+        type: "string"
+      origfilename:
+        type: "string"
+      public:
+        type: "boolean"
+      size:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "DocumentFile"
+  DocumentLink:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      target:
+        type: "integer"
+        format: "int64"
+      public:
+        type: "boolean"
+    xml:
+      name: "DocumentLink"
+  Folder:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        enum:
+          - folder
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      date:
+        type: "string"
+      comment:
+        type: "string"
+    xml:
+      name: "Folder"
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Category"
+  Attribute:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      value:
+        type: "string"
+    xml:
+      name: "Attribute"
+  AttributeDefinition:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      type:
+        type: "integer"
+        format: "int64"
+      objtype:
+        type: "integer"
+        format: "int64"
+      min:
+        type: "integer"
+        format: "int64"
+      max:
+        type: "integer"
+        format: "int64"
+      multiple:
+        type: "boolean"
+      valueset:
+        type: "array"
+        items:
+          type: "string"
+      regex:
+        type: "string"
+    xml:
+      name: "AttributeDefintion"
+  ApiResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "string"
+  ApiResponseUser:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/User"
+  ApiResponseUsers:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+  ApiResponseGroup:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Group"
+  ApiResponseGroups:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Group"
+  ApiResponseDocument:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Document"
+  ApiResponseDocuments:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Document"
+  ApiResponseDocumentContents:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/DocumentContent"
+  ApiResponseDocumentFiles:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/DocumentFile"
+  ApiResponseDocumentLinks:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/DocumentLink"
+  ApiResponseFolder:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Folder"
+  ApiResponseFolderPath:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+            name:
+              type: "string"
+              format: "int64"
+  ApiResponseCategory:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Category"
+  ApiResponseCategories:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Category"
+  ApiResponseAttributes:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Attribute"
+  ApiResponseAttributeDefinition:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/AttributeDefinition"
+  ApiResponseAttributeDefinitions:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/AttributeDefinition"
+externalDocs:
+  description: "Find out more about SeedDMS"
+  url: "https://www.seeddms.org"

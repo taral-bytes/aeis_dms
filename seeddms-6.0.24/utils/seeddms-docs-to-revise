@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "${SEEDDMS_HOME}" ]; then
+	parentdir=$(dirname "$0")
+	export SEEDDMS_HOME=$(dirname "$parentdir")
+fi
+
+php -f ${SEEDDMS_HOME}/utils/docstorevise.php -- "${@}"

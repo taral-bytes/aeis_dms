@@ -1,0 +1,16 @@
+Installation of external js packages
+-------------------------------------
+
+All javascript was located in styles/bootstrap until SeedDMS 5.1.18 and 6.0.11.
+Since 5.1.19 and 6.0.12 most of it has moved into the view at views/boostrap/vendors
+and is no longer placed in git but must be installed by npm and grunt.
+
+Run
+
+`npm install`
+
+and afterwards
+
+`grunt`
+
+to download the js packages and copy them into the new location.

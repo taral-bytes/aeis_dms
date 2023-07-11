@@ -1,0 +1,71 @@
+{
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    },
+
+    "require": {
+        "robthree/twofactorauth": "^1.5",
+        "sabre/dav": "^3.",
+        "sabre/xml": "^1.4.",
+        "slim/slim": "^3.0",
+        "erusev/parsedown": "*",
+        "erusev/parsedown-extra": "*",
+        "mibe/feedwriter": "^1.1",
+        "phpoffice/phpspreadsheet": "*",
+        "pear/log": "*",
+        "pear/mail": "*",
+        "pear/mail_mime": "*",
+        "pear/net_smtp": "*",
+        "pear/auth_sasl": "*",
+        "pear/db": "*",
+        "alecrabbit/php-console-colour": "*",
+        "dragonmantank/cron-expression": "^3",
+        "zf1/zend-search-lucene": "*",
+        "symfony/http-foundation": "^5.4",
+        "seeddms/core": "dev-master",
+        "seeddms/lucene": "dev-master",
+        "seeddms/preview": "dev-master",
+        "seeddms/sqlitefts": "dev-master",
+        "seeddms/http_webdav_server": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/home/cvs/seeddms-ext/core",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "/home/cvs/seeddms-ext/lucene",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "/home/cvs/seeddms-ext/preview",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "/home/cvs/seeddms-ext/sqlitefts",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "/home/cvs/seeddms-ext/http_webdav_server",
+            "options": {
+                "symlink": false
+            }
+        }
+    ]
+
+}

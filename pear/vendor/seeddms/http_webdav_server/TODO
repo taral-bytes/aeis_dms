@@ -1,0 +1,48 @@
+Short term (1.0 show stoppers):
+
+- documentation
+
+- check url en-/decodings (all pending bug reports are about this)
+
+
+Medium term (nice to have in 1.1):
+
+- the following items affect the fileserver example only,
+  these are not problems of the base class itself
+
+ - "Depth: Infinite" not supported yet (in PROPFIND)
+
+ - properties not always copied/moved (in COPY/MOVE)
+
+ - no recursove locks (in LOCK, UNLOCK etc.)
+- API cleanups
+
+- ETags support ...
+
+- MIME-type detection should become a
+  package of its own?
+
+- mimetype may be guessed for stream
+  (mime_magic extension now supports this in HEAD)
+
+- provide helper classes that extend the
+  Server class by adding prepared LOCKing 
+  functionality, eg.:
+	- HTTP_WebDAV_Server_Lock_MySQL
+	- HTTP_WebDAV_Server_Lock_dbm
+	- HTTP_WebDAV_Server_Lock_PearDB
+  - ...
+  (have to dig out my design pattern book ...?)
+
+
+
+Long term (definetly not in 1.0 or even 1.x):
+
+- the XML parsing parts are *very* Q&D
+  change to simpleXML and DOM (requires PHP5)
+
+- Versioning 
+
+- DASL
+
+- ...

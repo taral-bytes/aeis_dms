@@ -1,0 +1,42 @@
+Options -Indexes
+
+<IfModule mod_headers.c>
+Header set Strict-Transport-Security: "max-age=15768000; includeSubDomains; preload"
+Header set X-Content-Type-Options: "nosniff"
+</IfModule>
+
+RewriteEngine On
+#RewriteRule "^favicon\.ico$" "-" [L]
+#RewriteRule "^(favicon\.ico)$" %{HTTP_HOST}/views/bootstrap/images/favicon.svg [L,NC]
+RewriteRule "^(favicon\.ico)" /views/bootstrap/images/favicon.svg [L,NC]
+
+# Store the current location in an environment variable CWD to use
+# mod_rewrite in .htaccess files without knowing the RewriteBase
+RewriteCond $0#%{REQUEST_URI} ([^#]*)#(.*)\1$
+RewriteRule ^.*$ - [E=CWD:%2]
+
+# Do not allow access on the other directories in www
+RewriteRule "^utils/.*$" "" [F]
+RewriteRule "^doc/.*$" "" [F]
+
+# Anything below the following dirs will never be rewritten
+RewriteRule "^pdfviewer/.*$" "-" [L]
+RewriteRule "^views/.*/images.*$" "-" [L]
+RewriteRule "^out/images.*$" "-" [L]
+RewriteRule "^styles/.*$" "-" [L]
+
+# Accessing a file in an extension is only possible in one
+# of the directories op, out. res
+# Added for old extensions which do not use routes
+RewriteRule ^ext/[^/]+/icon.(?:png|svg)$ - [L]
+RewriteCond %{REQUEST_URI} "ext/[^/]+/"
+RewriteRule !^ext/[^/]+/.*(?:op|out|res|node_modules) - [F]
+RewriteCond %{REQUEST_URI} "ext/[^/]+/res/.*$" [NC]
+RewriteRule !^ext/[^/]+/res/.*\.(?:css|js|png|gif|svg|ico|html|woff) - [F]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ext/.*$ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^.*$ %{ENV:CWD}index.php [QSA,L]

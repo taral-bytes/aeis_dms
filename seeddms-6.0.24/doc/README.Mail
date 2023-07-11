@@ -1,0 +1,30 @@
+Mail configuration
+===================
+
+SeedDMS uses email to 
+
+* notify users about changes of documents and folders
+* send instructions during the password forgotten process
+
+Configuring email in SeedDMS is simple on systems running a
+local mail server, because this is the default in SeedDMS and
+no additional configuration is needed. On Linux you should
+consider running a local mail server, which relais the mails
+to your outgoing mail server. If you cannot run a local mail
+server, you can still configure SeedDMS to use an outgoing
+SMTP server. Below are some examples on how to configure
+SeedDMS for different hosters.
+
+1&1
+---------
+
+smtp server: ssl://smtp.1und1.de
+smtp port: 465
+
+Gmail
+---------
+smtp server: smtp.gmail.com
+smtp port: 587
+note: you have to turn on 'Less secure app access' in your google account,
+otherwise you will not be able to send mail. It will quit with an error
+complaining about wrong credentials

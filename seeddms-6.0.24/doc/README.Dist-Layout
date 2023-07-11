@@ -1,0 +1,95 @@
+Layout of installation
+=======================
+
+SeedDMS allows various kinds of installations with very individual layouts
+on disc. The proposed layout till version 5.1.6 was as the following:
+
+seeddms51x ---+--- data
+              |
+              +--- pear
+              |
+              +--- seeddms-5.1.x
+              |
+              +--- www -> seeddms-5.1.x
+
+'data' contains all document files, the sqlite database (if used), the full text
+data, the log files, and the cached preview images.
+
+'pear' contains all PEAR packages including the four SeedDMS packages SeedDMS_Core,
+SeedDMS_Lucene, SeedDMS_Preview, SeedDMS_SQLiteFTS.
+
+'seeddms-5.1.x' are the sources of seeddms and 'www' being a link on it.
+
+This layout has disadvantages when updating the source of seeddms, because
+the directories 'conf' and 'ext' had to be moved from 'seeddms-5.1.x' to
+'seeddms-5.1.(x+1)'. 'conf' was also visible over the web unless it was
+protected by an .htaccess file. The .htaccess file has been shipped, but it
+is far better to keep senѕitive data out of the document root in the first
+place.
+
+The new layout mostly retains that structure but uses more soft links to place
+the local data outside of 'seeddms-5.1.x' which makes updating a lot easier
+and moves the configuration out of the document root.
+As MS Windows does not support soft links, this change will only apply to Linux/Unix
+systems. MS Windows users just skip all the soft links and set seeddms-5.1.x
+as the document root. The new layout is the following:
+
+seeddms51x ---+--- data --+-- log
+              |           |
+              |           +-- cache
+              |           |
+              |           +-- 1048576
+              |           |
+              |           +-- ...
+              |
+              +--- pear
+              |
+              +--- conf
+              |
+              +--- seeddms-5.1.x
+              |
+              +--- seeddms -> seeddms-5.1.x
+              |
+              +--- www --+-- inc -> ../seeddms/inc
+                         |
+                         +-- op -> ../seeddms/op
+                         |
+                         +-- out -> ../seeddms/out
+                         |
+                         +-- views -> ../seeddms/views
+                         |
+                         +-- controllers -> ../seeddms/controllers
+                         |
+                         +-- styles -> ../seeddms/styles
+                         |
+                         +-- languages -> ../seeddms/languages
+                         |
+                         +-- webdav -> ../seeddms/webdav
+                         |
+                         +-- restapi -> ../seeddms/restapi
+                         |
+                         +-- pdfviewer -> ../seeddms/pdfviewer
+                         |
+                         +-- index.php -> ../seeddms/index.php
+                         |
+                         +-- ext
+
+In order to convert to this layout you need to do the following in the seeddms51x
+directory (replace the 'x' in '5.1.x' with the correct number):
+
+ln -s seeddms-5.1.x seeddms
+mv www/conf .
+mv seeddms-5.1.x/ext www
+cd www
+rm inc op out views controllers styles languages webdav restapi pdfviewer index.php
+ln -s ../seeddms/inc
+ln -s ../seeddms/op
+ln -s ../seeddms/out
+ln -s ../seeddms/views
+ln -s ../seeddms/controllers
+ln -s ../seeddms/styles
+ln -s ../seeddms/languages
+ln -s ../seeddms/webdav
+ln -s ../seeddms/restapi
+ln -s ../seeddms/pdfviewer
+ln -s ../seeddms/index.php

@@ -1,0 +1,6 @@
+Make sure to encode the data properly when using restapi functions which uses
+put. If you use curl, then encode the data as the following
+
+  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+

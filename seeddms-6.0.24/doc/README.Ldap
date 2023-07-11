@@ -1,0 +1,58 @@
+Ldap configuration
+===================
+
+The configuration for authentication against an ldap server needs to be done
+the settings.xml file using a text editor. It cannot be edited from within the
+web gui.
+
+SeedDMS supports ldap authentication using an Active Directory (AD) or a
+regular ldap server, e.g. openldap
+
+The location of the ldap server is specified in two parameters: 'host' and
+'port'.  'host' can be either a plain hostname or an ldap URI, including the
+protocol, the host and optionally the port, e.g. ldap://localhost:389. In case
+of an URI the port in the configuration must remain empty.
+
+The authentication itself is a two step process which differs, depending on how
+to bind to the server. If the configuration sets 'bindDN' and 'bindPW', those
+values will be used for a initial non anonymous bind to the ldap server
+otherwise an anonymous bind is executed.
+
+After the initial bind, a ldap search for either 'uid=<username>' (ldap) or
+'sAMAccountName=<username>' (AD) below basedn is done. The purpose of this
+search is to retrieve a working bindDN which is then used to actually
+authenticate the user. In case of an anonymous first bind the search will
+likely fail and the bindDN for the second bind will be either
+'uid=<username>,<basedn>' (ldap) or '<username>@<accountDomainName>' (AD). If
+the search succeeds the bindDN will be taken from the user's data in the ldap
+server. This bindDN will be used for a second bind using the users password.
+If the second bind succeeds the user could be successfully authenticated.
+
+The data from the ldap server can be used to create an account in SeedDMS
+if the user trying to login does not exist yet, but was able to authenticate.
+This will only be done if 'authentication->restricted' in the configuration
+is set to true. In that case the common name (cn) and email address is taken
+from ldap. Existing accounts in SeedDMS will not be updated with data from
+ldap.
+
+Examples
+---------
+
+Anonymous bind to openldap on localhost, port 389
+- type = "ldap"
+- baseDN = "ou=users,dc=mycompany,dc=de"
+- host = "ldap://localhost"
+
+During authentication as user 'admin' the following steps are executed
+
+1. connect to ldap server at localhost:389
+2. do an anonymous bind 
+3. search for 'uid=admin' below basedn
+4.1. if search succeeds use the dn from the user
+4.2. if search fails use 'uid=admin,<basedn>' as dn
+5. do a non anonymous bind with dn and password entered by user
+6. if step 5. succeeds the use is authenticated
+
+If bindDN and bindPW are specified in the configuration, the second step
+will be a non anonymous bind.
+
