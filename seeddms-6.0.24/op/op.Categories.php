@@ -47,18 +47,10 @@ if ($action == "addcategory") {
 	if($name == '') {
 		UI::exitError(getMLText("admin_tools"),getMLText("category_noname"));
 	}
-	$type = trim($_POST["type"]);
-
-	if ($type == '') {
-		UI::exitError(getMLText("admin_tools"), getMLText("category_notype"));
-	}
 	if (is_object($dms->getDocumentCategoryByName($name))) {
 		UI::exitError(getMLText("admin_tools"),getMLText("category_exists"));
 	}
-
-
-	$newCategory = $dms->addDocumentCategory($name,$type);
-
+	$newCategory = $dms->addDocumentCategory($name);
 	if (!$newCategory) {
 		UI::exitError(getMLText("admin_tools"),getMLText("error_occured"));
 	}
@@ -68,7 +60,7 @@ if ($action == "addcategory") {
 	add_log_line(".php&action=addcategory&categoryid=".$categoryid);
 }
 
-//Kategorie lï¿½schen ----------------------------------------------------------------------------------
+//Kategorie löschen ----------------------------------------------------------------------------------
 else if ($action == "removecategory") {
 
 	/* Check if the form data comes from a trusted request */

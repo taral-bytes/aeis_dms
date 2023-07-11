@@ -3266,8 +3266,6 @@ class SeedDMS_Core_DMS {
 
 		$queryStr = "SELECT * FROM `tblCategory` WHERE `id` = " . (int) $id;
 		$resArr = $this->db->getResultArray($queryStr);
-
-		
         if (is_bool($resArr) && !$resArr)
 			return false;
         if (count($resArr) != 1)
@@ -3283,13 +3281,12 @@ class SeedDMS_Core_DMS {
 		$queryStr = "SELECT * FROM `tblCategory` order by `name`";
 
 		$resArr = $this->db->getResultArray($queryStr);
-		
-		if (is_bool($resArr) && !$resArr) 
+		if (is_bool($resArr) && !$resArr)
 			return false;
 
 		$categories = array();
 		foreach ($resArr as $row) {
-			$cat = new SeedDMS_Core_DocumentCategory($row["id"], $row["name"],$row["position"]);
+			$cat = new SeedDMS_Core_DocumentCategory($row["id"], $row["name"]);
 			$cat->setDMS($this);
 			array_push($categories, $cat);
 		}
@@ -3321,17 +3318,14 @@ class SeedDMS_Core_DMS {
 		return $cat;
 	} /* }}} */
 
-	function addDocumentCategory($name,$type) { /* {{{ */
-
+	function addDocumentCategory($name) { /* {{{ */
 		$name = trim($name);
-		$type = trim($type);
-		if(!$name || !$type)
+		if(!$name)
 			return false;
 		if (is_object($this->getDocumentCategoryByName($name))) {
 			return false;
 		}
-
-		$queryStr = "INSERT INTO `tblCategory` (`name`,`type`) VALUES (" . $this->db->qstr($name) . "," . $this->db->qstr($type) . ")";
+		$queryStr = "INSERT INTO `tblCategory` (`name`) VALUES (".$this->db->qstr($name).")";
 		if (!$this->db->getResult($queryStr))
 			return false;
 

@@ -41,7 +41,7 @@ class SeedDMS_Core_DocumentCategory {
 
 	function __construct($id, $name) { /* {{{ */
 		$this->_id = $id;
-		// $this->_name = $name;
+		$this->_name = $name;
 		$this->_dms = null;
 	} /* }}} */
 

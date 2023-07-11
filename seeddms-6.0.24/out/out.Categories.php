@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-if (!isset($settings))
+if(!isset($settings))
 	require_once("../inc/inc.Settings.php");
 require_once("inc/inc.Utils.php");
 require_once("inc/inc.LogInit.php");
@@ -31,21 +31,21 @@ require_once("inc/inc.ClassUI.php");
 require_once("inc/inc.Authentication.php");
 
 $tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
-$view = UI::factory($theme, $tmp[1], array('dms' => $dms, 'user' => $user));
+$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user));
 $accessop = new SeedDMS_AccessOperation($dms, $user, $settings);
 if (!$accessop->check_view_access($view, $_GET)) {
-	UI::exitError(getMLText("admin_tools"), getMLText("access_denied"));
+	UI::exitError(getMLText("admin_tools"),getMLText("access_denied"));
 }
 
 $categories = $dms->getDocumentCategories();
 
-if (isset($_GET['categoryid']) && $_GET['categoryid']) {
+if(isset($_GET['categoryid']) && $_GET['categoryid']) {
 	$selcat = $dms->getDocumentCategory($_GET['categoryid']);
 } else {
 	$selcat = null;
 }
 
-if ($view) {
+if($view) {
 	$view->setParam('conversionmgr', $conversionmgr);
 	$view->setParam('categories', $categories);
 	$view->setParam('selcategory', $selcat);

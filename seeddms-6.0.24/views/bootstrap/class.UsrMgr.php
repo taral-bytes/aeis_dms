@@ -322,22 +322,12 @@ $(document).ready( function() {
 		}
 		$this->formField(
 			getMLText("user_name"),
-			array( 
+			array(
 				'element'=>'input',
 				'type'=>'text',
 				'id'=>'name',
 				'name'=>'name',
 				'value'=>($currUser ? htmlspecialchars($currUser->getFullName()) : '')
-			)
-		);
-		$this->formField(
-			getMLText("last_name"),
-			array(
-				'element' => 'input',
-				'type' => 'text',
-				'id' => 'name',
-				'name' => 'name',
-				'value' => ($currUser ? htmlspecialchars($currUser->getFullName()) : '')
 			)
 		);
 		$this->formField(

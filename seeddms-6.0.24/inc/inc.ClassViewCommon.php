@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Implementation of view class
  *
@@ -27,8 +26,7 @@ require_once "inc.ClassHook.php";
  *             2010-2012 Uwe Steinmann
  * @version    Release: @package_version@
  */
-class SeedDMS_View_Common
-{
+class SeedDMS_View_Common {
 	protected $theme;
 
 	protected $params;
@@ -37,15 +35,14 @@ class SeedDMS_View_Common
 
 	protected $imgpath;
 
-	public function __construct($params, $theme = 'bootstrap')
-	{
+	public function __construct($params, $theme='bootstrap') {
 		$this->theme = $theme;
 		$this->params = $params;
 		$this->baseurl = '';
-		if (isset($params['settings']))
-			$this->imgpath = $params['settings']->_httpRoot . 'views/' . $theme . '/images/';
+		if(isset($params['settings']))
+			$this->imgpath = $params['settings']->_httpRoot.'views/'.$theme.'/images/';
 		else
-			$this->imgpath = '../views/' . $theme . '/images/';
+			$this->imgpath = '../views/'.$theme.'/images/';
 	}
 
 	/**
@@ -60,22 +57,21 @@ class SeedDMS_View_Common
 	 * @params array $get $_GET or $_POST variables (since 5.1.27 this is no longer used)
 	 * @return mixed return value of called method
 	 */
-	public function __invoke($get = array())
-	{
+	public function __invoke($get=array()) {
 		$action = null;
 		$request = $this->getParam('request');
-		if ($request) {
-			if ($request->isMethod('get'))
+		if($request) {
+			if($request->isMethod('get'))
 				$action = $request->query->get('action');
-			elseif ($request->isMethod('post'))
+			elseif($request->isMethod('post'))
 				$action = $request->request->get('action');
 		}
-		if (!$this->callHook('preRun', get_class($this), $action ? $action : 'show')) {
-			if ($action) {
-				if (method_exists($this, $action)) {
+		if(!$this->callHook('preRun', get_class($this), $action ? $action : 'show')) {
+			if($action) {
+				if(method_exists($this, $action)) {
 					$this->{$action}();
 				} else {
-					echo "Missing action '" . htmlspecialchars($action) . "'";
+					echo "Missing action '".htmlspecialchars($action)."'";
 				}
 			} else
 				$this->show();
@@ -85,19 +81,16 @@ class SeedDMS_View_Common
 		$this->callHook('postRun', $action ? $action : 'show');
 	}
 
-	public function setParams($params)
-	{
+	public function setParams($params) {
 		$this->params = $params;
 	}
 
-	public function setParam($name, $value)
-	{
+	public function setParam($name, $value) {
 		$this->params[$name] = $value;
 	}
 
-	public function getParam($name)
-	{
-		if (isset($this->params[$name]))
+	public function getParam($name) {
+		if(isset($this->params[$name]))
 			return $this->params[$name];
 		return null;
 	}
@@ -108,29 +101,25 @@ class SeedDMS_View_Common
 	 * @param string $name name of parameter
 	 * @return boolean true if parameter exists otherwise false
 	 */
-	public function hasParam($name)
-	{
+	public function hasParam($name) {
 		return isset($this->params[$name]) ? true : false;
 	}
 
-	public function unsetParam($name)
-	{
-		if (isset($this->params[$name]))
+	public function unsetParam($name) {
+		if(isset($this->params[$name]))
 			unset($this->params[$name]);
 	}
 
-	public function setBaseUrl($baseurl)
-	{
+	public function setBaseUrl($baseurl) {
 		$this->baseurl = $baseurl;
 	}
 
-	public function getTheme()
-	{
+	public function getTheme() {
 		return $this->theme;
 	}
 
-	public function show()
-	{ }
+	public function show() {
+	}
 
 	/**
 	 * Return a list of hook classes for the current class
@@ -153,18 +142,17 @@ class SeedDMS_View_Common
 	 *
 	 * @return array list of view class names.
 	 */
-	protected function getHookClassNames()
-	{ /* {{{ */
+	protected function getHookClassNames() { /* {{{ */
 		$tmps = array();
 		/* the viewAliasName can be set in the view to specify a different name
 		 * than extracted from the class name.
 		 */
-		if (property_exists($this, 'viewAliasName') && !empty($this->viewAliasName)) {
+		if(property_exists($this, 'viewAliasName') && !empty($this->viewAliasName)) {
 			$tmps[] = $this->viewAliasName;
 		}
 		$tmp = explode('_', get_class($this));
 		$tmps[] = $tmp[2];
-		foreach (class_parents($this) as $pc) {
+		foreach(class_parents($this) as $pc) {
 			$tmp = explode('_', $pc);
 			$tmps[] = $tmp[2];
 		}
@@ -190,43 +178,42 @@ class SeedDMS_View_Common
 	 * @return string concatenated string, merged arrays or whatever the hook
 	 * function returns
 	 */
-	public function callHook($hook)
-	{ /* {{{ */
+	public function callHook($hook) { /* {{{ */
 		$tmps = $this->getHookClassNames();
 		$ret = null;
-		foreach ($tmps as $tmp)
-			if (isset($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)])) {
-				foreach ($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)] as $hookObj) {
-					if (method_exists($hookObj, $hook)) {
-						switch (func_num_args()) {
-							case 1:
-								$tmpret = $hookObj->$hook($this);
-								break;
-							case 2:
-								$tmpret = $hookObj->$hook($this, func_get_arg(1));
-								break;
-							case 3:
-								$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2));
-								break;
-							case 4:
-								$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2), func_get_arg(3));
-								break;
-							default:
-							case 5:
-								$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2), func_get_arg(3), func_get_arg(4));
-								break;
-						}
-						if ($tmpret !== null) {
-							if (is_string($tmpret)) {
-								$ret = ($ret === null) ? $tmpret : (is_string($ret) ? $ret . $tmpret : array_merge($ret, array($tmpret)));
-							} elseif (is_array($tmpret) || is_object($tmpret)) {
-								$ret = ($ret === null) ? $tmpret : (is_string($ret) ? array_merge(array($ret), $tmpret) : array_merge($ret, $tmpret));
-							} else
-								$ret = $tmpret;
-						}
+		foreach($tmps as $tmp)
+		if(isset($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)])) {
+			foreach($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)] as $hookObj) {
+				if (method_exists($hookObj, $hook)) {
+					switch(func_num_args()) {
+						case 1:
+							$tmpret = $hookObj->$hook($this);
+							break;
+						case 2:
+							$tmpret = $hookObj->$hook($this, func_get_arg(1));
+							break;
+						case 3:
+							$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2));
+							break;
+						case 4:
+							$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2), func_get_arg(3));
+							break;
+						default:
+						case 5:
+							$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2), func_get_arg(3), func_get_arg(4));
+							break;
+					}
+					if($tmpret !== null) {
+						if(is_string($tmpret)) {
+							$ret = ($ret === null) ? $tmpret : (is_string($ret) ? $ret.$tmpret : array_merge($ret, array($tmpret)));
+						} elseif(is_array($tmpret) || is_object($tmpret)) {
+							$ret = ($ret === null) ? $tmpret : (is_string($ret) ? array_merge(array($ret), $tmpret) : array_merge($ret, $tmpret));
+						} else
+							$ret = $tmpret;
 					}
 				}
 			}
+		}
 		return $ret;
 	} /* }}} */
 
@@ -251,15 +238,14 @@ class SeedDMS_View_Common
 	 * @params string $classname name of class (current class if left empty)
 	 * @return array list of hook objects registered for the class
 	 */
-	public function getHookObjects($classname = '')
-	{ /* {{{ */
-		if ($classname)
+	public function getHookObjects($classname='') { /* {{{ */
+		if($classname)
 			$tmps = array(explode('_', $classname)[2]);
 		else
 			$tmps = $this->getHookClassNames();
 		$hooks = [];
-		foreach ($tmps as $tmp) {
-			if (isset($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)])) {
+		foreach($tmps as $tmp) {
+			if(isset($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)])) {
 				$hooks = array_merge($hooks, $GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)]);
 			}
 		}
@@ -274,12 +260,11 @@ class SeedDMS_View_Common
 	 *               true if all hooks succedded,
 	 *               null if no hook was called
 	 */
-	public function hasHook($hook)
-	{ /* {{{ */
+	public function hasHook($hook) { /* {{{ */
 		$tmps = $this->getHookClassNames();
-		foreach ($tmps as $tmp) {
-			if (isset($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)])) {
-				foreach ($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)] as $hookObj) {
+		foreach($tmps as $tmp) {
+			if(isset($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)])) {
+				foreach($GLOBALS['SEEDDMS_HOOKS']['view'][lcfirst($tmp)] as $hookObj) {
 					if (method_exists($hookObj, $hook)) {
 						return true;
 					}
@@ -304,17 +289,16 @@ class SeedDMS_View_Common
 	 * @param string|array $name name of view or list of view names
 	 * @return boolean true if access is allowed otherwise false
 	 */
-	protected function check_view_access($name = '')
-	{ /* {{{ */
-		if (!$name)
+	protected function check_view_access($name='') { /* {{{ */
+		if(!$name)
 			$name = $this;
-		if (!isset($this->params['accessobject']))
+		if(!isset($this->params['accessobject']))
 			return false;
 		$access = $this->params['accessobject']->check_view_access($name);
 		return $access;
 
-		if (isset($this->params['user']) && $this->params['user']->isAdmin()) {
-			if ($access === -1)
+		if(isset($this->params['user']) && $this->params['user']->isAdmin()) {
+			if($access === -1)
 				return false;
 			else
 				return true;
@@ -330,13 +314,12 @@ class SeedDMS_View_Common
 	 * @param array $urlparams list of url parameters
 	 * @return string $url
 	 */
-	protected function html_url($view, $urlparams = array())
-	{ /* {{{ */
-		$url = $this->params['settings']->_httpRoot . "out/out." . $view . ".php";
-		if (is_array($urlparams))
-			$url .= "?" . http_build_query($urlparams);
-		elseif (is_string($urlparams))
-			$url .= "?" . $urlparams;
+	protected function html_url($view, $urlparams=array()) { /* {{{ */
+		$url = $this->params['settings']->_httpRoot."out/out.".$view.".php";
+		if(is_array($urlparams))
+			$url .= "?".http_build_query($urlparams);
+		elseif(is_string($urlparams))
+			$url .= "?".$urlparams;
 		return $url;
 	} /* }}} */
 
@@ -352,41 +335,38 @@ class SeedDMS_View_Common
 	 * @param boolean $hsc set to false if htmlspecialchars() shall not be called
 	 * @return string link
 	 */
-	protected function html_link($view = '', $urlparams = array(), $linkparams = array(), $link, $hsc = true, $nocheck = false, $wrap = array())
-	{ /* {{{ */
-		if (!$nocheck)
-			if (!$this->check_view_access($view))
+	protected function html_link($view='', $urlparams=array(), $linkparams=array(), $link, $hsc=true, $nocheck=false, $wrap=array()) { /* {{{ */
+		if(!$nocheck)
+			if(!$this->check_view_access($view))
 				return '';
 		$url = $this->html_url($view, $urlparams);
-		$tag = "<a href=\"" . $url . "\"";
-		if ($linkparams)
-			foreach ($linkparams as $k => $v)
-				$tag .= " " . $k . "=\"" . $v . "\"";
-		$tag .= ">" . ($hsc ? htmlspecialchars($link) : $link) . "</a>";
-		if (is_array($wrap) && count($wrap) == 2)
-			return $wrap[0] . $tag . $wrap[1];
+		$tag = "<a href=\"".$url."\"";
+		if($linkparams)
+			foreach($linkparams as $k=>$v)
+				$tag .= " ".$k."=\"".$v."\"";
+		$tag .= ">".($hsc ? htmlspecialchars($link) : $link)."</a>";
+		if(is_array($wrap) && count($wrap) == 2)
+			return $wrap[0].$tag.$wrap[1];
 		return $tag;
 	} /* }}} */
 
-	public function jsTranslations($keys)
-	{ /* {{{ */
+	public function jsTranslations($keys) { /* {{{ */
 		echo "var trans = {\n";
-		foreach ($keys as $key) {
-			echo "	'" . $key . "': '" . str_replace("'", "\\\'", getMLText($key)) . "',\n";
+		foreach($keys as $key) {
+			echo "	'".$key."': '".str_replace("'", "\\\'", getMLText($key))."',\n";
 		}
 		echo "};\n";
 	} /* }}} */
 
-	public static function getContrastColor($hexcolor)
-	{ /* {{{ */
+	public static function getContrastColor($hexcolor) { /* {{{ */
 		$r = hexdec(substr($hexcolor, 1, 2));
 		$g = hexdec(substr($hexcolor, 3, 2));
 		$b = hexdec(substr($hexcolor, 5, 2));
-		if (0) {
+		if(0) {
 			$yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
 			return ($yiq >= 148) ? '000000' : 'ffffff';
 		} else {
-			$l = (max($r, max($g, $b)) + min($r, min($g, $b))) / 2;
+			$l = (max($r, max($g, $b)) + min($r, min($g, $b)))/2;
 			return ($l > 128) ? '000000' : 'ffffff';
 		}
 	} /* }}} */

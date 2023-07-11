@@ -422,7 +422,6 @@ class SeedDMS_Core_DatabaseAccess {
 			return false;
 		}
 		$resArr = $res->fetchAll(PDO::FETCH_ASSOC);
-		
 //		$res->Close();
 		return $resArr;
 	} /* }}} */
